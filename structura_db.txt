@@ -1,0 +1,41 @@
+Users
+  id - PK
+  username
+  first_name
+  last_name
+  email
+  password
+  token
+  user_type_id - FK
+  date_created
+  last_login
+
+User_Type
+  id - PK
+  user_type (administrator, user, journalist, editor)
+
+Categories
+  id - PK
+  category_name (artistic, technic, science, fashion)
+
+Status
+  id -PK
+  status (published, unpublished, draft, archived)
+
+Articole
+  id - PK
+  title
+  content
+  date_created
+  date_modified
+  user_id - FK
+  category_id -FK
+  status_id (published, unpublished, draft, archived)
+
+Comments
+  id - PK
+  content
+  date_created
+  date_modified
+  user_id - FK
+  article_id - FK
