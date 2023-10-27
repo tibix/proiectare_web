@@ -1,41 +1,45 @@
 Users
-  id - PK
-  username
-  first_name
-  last_name
-  email
-  password
-  token
-  user_type_id - FK
-  date_created
-  last_login
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  u_name - VARCHAR(20)UNIQUE
+  f_name - VARCHAR(100) NOT NULL
+  l_name - VARCHAR(100) NOT NULL
+  email - VARCHAR(50) NOT NULL UNIQUE
+  password - MD5(VARCHAR(128))
+  token - VARCHAR(20)
+  user_type_id - FK INT DEFAULT (1)
+  date_created - DATE()
+  last_login - DATETIME()
 
 User_Type
-  id - PK
-  user_type (administrator, user, journalist, editor)
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  user_type - VARCHAR(15)
+  (administrator(4), user (1), journalist(2), editor(3))
+  description - VARCHAR(500)
 
 Categories
-  id - PK
-  category_name (artistic, technic, science, fashion)
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  category_name - VARCHAR(20) (artistic, technic, science, fashion)
+  description - VARCHAR(500)
 
 Status
-  id -PK
-  status (published, unpublished, draft, archived)
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  status - VARCHAR(15) (published, unpublished, draft, archived)
+  description - VARCHAR(500)
 
 Articole
-  id - PK
-  title
-  content
-  date_created
-  date_modified
-  user_id - FK
-  category_id -FK
-  status_id (published, unpublished, draft, archived)
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  title - VARCHAR(100)
+  content - TEXT() COLLATION utf8-unicode-ci
+  date_created - DATETIME()
+  date_modified - DATETIME()
+  user_id - INT NOT NULL FK 
+  category_id - INT NOT NUL FK
+  status_id - INT NOT NULL FK
 
 Comments
-  id - PK
-  content
-  date_created
-  date_modified
-  user_id - FK
-  article_id - FK
+  id - INT UNSIGNED NOT NULL AUTO_INCREMENT PK
+  content - TEXT
+  date_created - DATETIME()
+  user_id - INT NOT NULL FK
+  article_id - INT NOT NULL FK
+  parent_comment_id - INT
