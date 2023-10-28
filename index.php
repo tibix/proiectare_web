@@ -1,6 +1,11 @@
 <?php
+	include_once('db_con.php');
+
+	$db_connection = new DB_mgmt('localhost', 'root', '', 'editorial');
+	$db_connection->get_users();
+	$user_data = $db_connection->get_user_data('tdascal');
+
 	$title = "Proiect pentru Proiectare WEB";
-	$authors = ["Ovidiu", "Ionut", "Tiberiu"];
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -13,8 +18,10 @@
 	<h1><?php echo $title ?></h1>
 	<ul>
 		<?php
-			foreach($authors as $author) {
-				echo "<li> {$author} </li>";
+			if($user_data != 0){
+				foreach($user_data as $key=>$value){
+					echo "<li>{$key} => {$value}</li>";
+				}
 			}
 		?>
 	</ul>
