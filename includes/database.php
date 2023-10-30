@@ -23,7 +23,7 @@ class Database
         return $this->conn->real_escape_string($str);
     }
 
-    public void function close()
+    public function close()
     {
         $this->conn->close();
     }

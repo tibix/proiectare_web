@@ -1,12 +1,8 @@
-<footer>
-    <div class="container">
-        <p>&copy; 2023 Numele Platformei. Toate drepturile rezervate.</p>
-        <ul>
-            <li><a href="#">Termeni și Condiții</a></li>
-            <li><a href="#">Politica de Confidențialitate</a></li>
-            <li><a href="#">Contact</a></li>
-        </ul>
+<footer class="bg-light text-center text-lg-start">
+    <!-- Copyright -->
+    <div class="text-center p-3" style="background-color: rgba(0, 0, 0, 0.2);">
+        © 2023 Copyright:
+        <a class="text-dark" href="https://localhost/">Revista IOT</a>
     </div>
+    <!-- Copyright -->
 </footer>
-</body>
-</html>
