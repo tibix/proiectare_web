@@ -1,20 +1,39 @@
 <?php
-require_once 'includes/config.php';
-require_once 'includes/database.php';
-require_once 'classes/Article.php';
+    require_once 'includes/config.php';
+    require_once 'includes/database.php';
+    require_once 'includes/utils.php';
+    require_once 'classes/Article.php';
 
-include 'templates/header.php';
+    include 'templates/header.php';
 
-if(isset($_POST['autentificare'])){
-    $email = NULL;
-    $password = NULL;
+    if(isset($_POST['autentificare'])){
+        $email = NULL;
+        $password = NULL;
+        $errors = array();
 
-    if(!empty($_POST['email'])) { $email = $_POST['email']; }
+        if(!empty($_POST['email'])) { $email = $_POST['email']; } else { $errors[] = "Email invalid!"; }
+        if(!empty($_POST['password'])) { $password = $_POST['password']; } else { $errors[] = "Parola invalida!"; }
 
-    if(!empty($_POST['password'])) { $password = $_POST['password']; }
-
-    echo "{$email} - {$password}";
-} else {
+        $db = new mysqli("localhost", "root", "", "editorial");
+        $sql = "SELECT u_name, pass FROM users WHERE email = '$email'";
+        $result = $db->query($sql);
+        if($result->num_rows > 0){
+            $row = $result->fetch_assoc();
+            $db->close();
+            if($row['pass'] == md5($password)){
+                // login user
+                $_SESSION['user'] = $row['u_name'];
+                $_SESSION['logged_in'] = true;
+                header("Location: home.php");
+            } else {
+                echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Parola incorecta!";
+                echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+            }
+        } else {
+            echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Utilizatorul nu exista!";
+            echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+        }
+    } else {
 
 ?>
 <form method="POST">
@@ -51,7 +70,7 @@ if(isset($_POST['autentificare'])){
                             </div>
 
                             <div>
-                                <p class="mb-0">Don't have an account? <a href="inregistrare.php" class="text-white-50 fw-bold">Sign Up</a>
+                                <p class="mb-0">Nu aveti cont? <a href="inregistrare.php" class="text-white-50 fw-bold">Inregistrati-va aici</a>
                                 </p>
                             </div>
 
