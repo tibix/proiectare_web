@@ -15,7 +15,7 @@
         if(!empty($_POST['password'])) { $password = $_POST['password']; } else { $errors[] = "Parola invalida!"; }
 
         $db = new mysqli("localhost", "root", "", "editorial");
-        $sql = "SELECT u_name, pass FROM users WHERE email = '$email'";
+        $sql = "SELECT u_name, f_name, l_name, pass, u_type_id FROM users WHERE email = '$email'";
         $result = $db->query($sql);
         if($result->num_rows > 0){
             $row = $result->fetch_assoc();
@@ -23,7 +23,10 @@
             if($row['pass'] == md5($password)){
                 // login user
                 $_SESSION['user'] = $row['u_name'];
-                $_SESSION['logged_in'] = true;
+                $_SESSION['f_name'] = $row['f_name'];
+                $_SESSION['l_name'] = $row['l_name'];
+                $_SESSION['email'] = $row['email'];
+                $_SESSION['logged_in'] = True;
                 header("Location: home.php");
             } else {
                 echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Parola incorecta!";
@@ -34,7 +37,6 @@
             echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
         }
     } else {
-
 ?>
 <form method="POST">
     <section class="vh-100 gradient-custom">
