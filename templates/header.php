@@ -1,5 +1,5 @@
 <?php
-    session_start();
+    include(dirname(__DIR__).'/includes/utils.php');
 ?>
 <!DOCTYPE html>
 <html>
@@ -23,9 +23,9 @@
                     <span class="navbar-toggler-icon"></span>
                 </button>
                 <div class="collapse navbar-collapse" id="navbarTogglerDemo01">
-                    <a class="navbar-brand" href="{% url 'index' %}">Revista IOT</a>
+                    <a class="navbar-brand" href="index.php">Revista IOT</a>
                     <?php
-                        if(isset($_SESSION)){
+                        if(logged_in()){
                     ?>
                         <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <form class="d-flex d-inline">
@@ -96,11 +96,8 @@
                                 </a>
                             </li>
                         </ul>
-                        <a class="text-decoration-none text-white" href="autentificare.php">
-                            <button class="btn btn-outline-light outline-light mx-2" type="submit">Autentificare</button>
-                        </a>
-                        <a class="text-decoration-none text-white" href="inregistrare.php">
-                            <button class="btn btn-outline-light mx-2" type="submit">Inregistrare</button>
+                        <a class="text-decoration-none text-white" href="deconectare.php">
+                            <button class="btn btn-outline-light outline-light mx-2" type="submit">Deconectare</button>
                         </a>
                     <?php } ?>
                 </div>
