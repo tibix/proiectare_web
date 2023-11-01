@@ -29,7 +29,7 @@
                 $_SESSION['email'] = $row['email'];
                 $_SESSION['u_type_id'] = $row['u_type_id'];
                 $_SESSION['loggedin'] = TRUE;
-                header("Location: home.php");
+                redirect("home.php");
             } else {
                 echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Parola incorecta!";
                 echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
