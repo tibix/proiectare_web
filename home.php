@@ -14,7 +14,7 @@ if(logged_in()){
 
 <?php
 } else {
-    header("Location: autentificare.php");
+    redirect("autentificare.php");
 }
 include 'templates/footer.php';
 ?>
