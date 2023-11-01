@@ -111,7 +111,7 @@ if(isset($_POST['inregistrare'])){
                                 </div>
 
                                 <div class="mt-4 pt-2">
-                                    <input class="btn btn-primary btn-lg" type="submit" name="inregistrare" value="Inregistrare" />
+                                    <input class="btn btn-warning btn-lg" type="submit" name="inregistrare" value="Inregistrare" />
                                 </div>
 
                             </form>

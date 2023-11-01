@@ -1,8 +1,8 @@
--- MariaDB dump 10.19  Distrib 10.4.28-MariaDB, for osx10.10 (x86_64)
+-- MariaDB dump 10.19  Distrib 10.9.3-MariaDB, for Win64 (AMD64)
 --
 -- Host: localhost    Database: editorial
 -- ------------------------------------------------------
--- Server version	10.4.28-MariaDB
+-- Server version	10.9.3-MariaDB
 
 /*!40101 SET @OLD_CHARACTER_SET_CLIENT=@@CHARACTER_SET_CLIENT */;
 /*!40101 SET @OLD_CHARACTER_SET_RESULTS=@@CHARACTER_SET_RESULTS */;
@@ -33,7 +33,7 @@ CREATE TABLE `articles` (
   `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -57,7 +57,7 @@ CREATE TABLE `categories` (
   `category_name` varchar(20) NOT NULL,
   `description` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -84,7 +84,7 @@ CREATE TABLE `comments` (
   `article_id` int(11) NOT NULL,
   `parent_comment_id` int(11) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -108,7 +108,7 @@ CREATE TABLE `status` (
   `status` varchar(15) NOT NULL,
   `description` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -132,7 +132,7 @@ CREATE TABLE `user_type` (
   `user_type` varchar(15) NOT NULL,
   `description` varchar(300) DEFAULT NULL,
   PRIMARY KEY (`id`)
-) ENGINE=MyISAM DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -141,6 +141,11 @@ CREATE TABLE `user_type` (
 
 LOCK TABLES `user_type` WRITE;
 /*!40000 ALTER TABLE `user_type` DISABLE KEYS */;
+INSERT INTO `user_type` VALUES
+(1,'utilizator','Utilizator simplu cu drepturi doar de vizualizare. Utilizatorii de acest tip mai au si posibilitatea de a salva o lista de articole favorite.'),
+(2,'jurnalist','Utilizatori cu drepturi de vizualizare si editare/publicare de articole.'),
+(3,'editor','Editorul are responsabilitatea de analiza / aproba / anula articole ce urmeaza sa fie publicate. Editorul poate lasa comentarii asupra articolelor ne-publicate.'),
+(4,'administrator','Utilizatorul cu drepturi de administrator are control absolut asupra utilizatorilor, jurnalistilor si editorilor. Poate crea / sterge si modifica  utlizatori, articole si setari de configurare ale platformei.');
 /*!40000 ALTER TABLE `user_type` ENABLE KEYS */;
 UNLOCK TABLES;
 
@@ -160,12 +165,13 @@ CREATE TABLE `users` (
   `password` varchar(128) NOT NULL,
   `token` varchar(20) DEFAULT NULL,
   `u_type_id` int(11) NOT NULL DEFAULT 1,
-  `date_created` datetime NOT NULL,
-  `last_login` datetime DEFAULT NULL,
+  `date_created` datetime NOT NULL DEFAULT current_timestamp(),
+  `last_login` datetime DEFAULT current_timestamp(),
   PRIMARY KEY (`id`),
   UNIQUE KEY `u_name` (`u_name`),
-  UNIQUE KEY `email` (`email`)
-) ENGINE=MyISAM AUTO_INCREMENT=4 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+  UNIQUE KEY `email` (`email`),
+  KEY `fk_u_type_id` (`u_type_id`)
+) ENGINE=MyISAM AUTO_INCREMENT=5 DEFAULT CHARSET=utf8mb4;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -174,7 +180,11 @@ CREATE TABLE `users` (
 
 LOCK TABLES `users` WRITE;
 /*!40000 ALTER TABLE `users` DISABLE KEYS */;
-INSERT INTO `users` VALUES (1,'tdascal','Tiberiu','Dascal','tdascal@email.com','2d18742fe4852899a04941acd83f132c',NULL,1,'2023-10-28 14:38:45',NULL),(2,'ovidiu','Ovidiu','Benjamin','ovidiu@email.com','06b358bcc24beae9ca8915d573022202',NULL,1,'2023-10-28 14:39:12',NULL),(3,'ionut','Ionut','Vinte','ionut@email.com','5e498ed463ea7a6be7e2d9215a5f8781',NULL,1,'2023-10-28 14:39:38',NULL);
+INSERT INTO `users` VALUES
+(1,'tdascal','Tiberiu','Dascal','tdascal@email.com','2d18742fe4852899a04941acd83f132c',NULL,2,'2023-10-28 14:38:45',NULL),
+(2,'ovidiu','Ovidiu','Benjamin','ovidiu@email.com','06b358bcc24beae9ca8915d573022202',NULL,3,'2023-10-28 14:39:12',NULL),
+(3,'ionut','Ionut','Vinte','ionut@email.com','5e498ed463ea7a6be7e2d9215a5f8781',NULL,4,'2023-10-28 14:39:38',NULL),
+(4,'tb','Tiberiu','Dascal2','tb@email.com','202cb962ac59075b964b07152d234b70',NULL,1,'2023-10-31 14:28:43',NULL);
 /*!40000 ALTER TABLE `users` ENABLE KEYS */;
 UNLOCK TABLES;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
@@ -187,4 +197,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-10-30 17:41:15
+-- Dump completed on 2023-11-01 12:09:02

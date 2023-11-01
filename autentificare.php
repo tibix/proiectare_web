@@ -14,7 +14,7 @@
         if(!empty($_POST['email'])) { $email = $_POST['email']; } else { $errors[] = "Email invalid!"; }
         if(!empty($_POST['password'])) { $password = $_POST['password']; } else { $errors[] = "Parola invalida!"; }
 
-        $db = new mysqli("localhost", "root", "root", "editorial");
+        $db = new mysqli("localhost", "root", "", "editorial");
         $sql = "SELECT u_name, f_name, l_name, password, email, u_type_id FROM users WHERE email = '$email'";
 
         $result = $db->query($sql);
@@ -27,8 +27,9 @@
                 $_SESSION['f_name'] = $row['f_name'];
                 $_SESSION['l_name'] = $row['l_name'];
                 $_SESSION['email'] = $row['email'];
+                $_SESSION['u_type_id'] = $row['u_type_id'];
                 $_SESSION['loggedin'] = TRUE;
-                //header("Location: home.php");
+                header("Location: home.php");
             } else {
                 echo "<div class=\"alert alert-warning alert-dismissible fade show\" role=\"alert\">Parola incorecta!";
                 echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
