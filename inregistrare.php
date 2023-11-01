@@ -19,9 +19,22 @@ if(isset($_POST['inregistrare'])){
     if(!empty($_POST['u_password_c'])) { $password2 = $_POST['u_password_c']; } else { $errors[] = "Confirmare parola invalida!</br>"; }
     if($_POST['u_password'] !== $_POST['u_password_c']) { $errors[] = "Parolele nu coincid!</br>"; }
 
+    $check_email = "SELECT email FROM users WHERE email = '$email'";
+    $check_u_name = "SELECT u_name FROM users WHERE u_name = '$u_name'";
+    $db = new mysqli("localhost", "root", "root", "editorial");
+    $result_email = $db->query($check_email);
+    $result_u_name = $db->query($check_u_name);
+    if($result_email->num_rows > 0){
+        $errors[] = "Email-ul este deja folosit!</br>";
+    }
+    if($result_u_name->num_rows > 0){
+        $errors[] = "Numele de utilizator este deja folosit!</br>";
+    }
+    $db->close();
+
     if(empty($errors)){
         // save data to DB
-        $db = new mysqli("localhost", "root", "", "editorial");
+        $db = new mysqli("localhost", "root", "root", "editorial");
         // convert password to MD5 encripted string
         $password = md5($password);
         $now = date('Y-m-d H:i:s');
@@ -31,7 +44,7 @@ if(isset($_POST['inregistrare'])){
             $db->close();
             redirect("autentificare.php");
         } else {
-            echo $db->error();
+            echo $db->error;
         }
 
     } else {
