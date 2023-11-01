@@ -11,11 +11,11 @@
         $password = NULL;
         $errors = array();
 
-        if(!empty($_POST['email'])) { $email = $_POST['email']; } else { $errors[] = "Email invalid!"; }
+        if(!empty($_POST['login'])) { $login = $_POST['login']; } else { $errors[] = "Login invalid!"; }
         if(!empty($_POST['password'])) { $password = $_POST['password']; } else { $errors[] = "Parola invalida!"; }
 
-        $db = new mysqli("localhost", "root", "", "editorial");
-        $sql = "SELECT u_name, f_name, l_name, password, email, u_type_id FROM users WHERE email = '$email'";
+        $db = new mysqli("localhost", "root", "root", "editorial");
+        $sql = "SELECT u_name, f_name, l_name, password, email, u_type_id FROM users WHERE email = '$login' OR u_name = '$login'";
 
         $result = $db->query($sql);
         if($result->num_rows > 0){
@@ -48,12 +48,12 @@
                             <div class="card-body p-5 text-center">
                                 <div class="mb-md-5 mt-md-4 pb-5">
                                     <h2 class="fw-bold mb-2 text-uppercase">Autentificare</h2>
-                                    <p class="text-white-50 mb-5">Intorduceti email si parola pentru autentificare!</p>
+                                    <p class="text-white-50 mb-5">Intorduceti email/nume utilizator si parola pentru autentificare!</p>
 
                                     <div class="form-outline form-white mb-4">
-                                        <input type="email" name="email" id="email" class="form-control form-control-lg"
+                                        <input type="text" name="login" id="login" class="form-control form-control-lg"
                                         value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" />
-                                        <label class="form-label" for="typeEmailX">Email</label>
+                                        <label class="form-label" for="typeEmailX">Email/Nume utilizator</label>
                                     </div>
                                     <div class="form-outline form-white mb-4">
                                         <input type="password" name="password" id="password" class="form-control form-control-lg" />
@@ -93,8 +93,8 @@
                                 <p class="text-white-50 mb-5">Intorduceti email si parola pentru autentificare!</p>
 
                                 <div class="form-outline form-white mb-4">
-                                    <input type="email" name="email" id="email" class="form-control form-control-lg" />
-                                    <label class="form-label" for="typeEmailX">Email</label>
+                                    <input type="text" name="login" id="login" class="form-control form-control-lg" />
+                                    <label class="form-label" for="typeEmailX">Email / Nume utilizator</label>
                                 </div>
                                 <div class="form-outline form-white mb-4">
                                     <input type="password" name="password" id="password" class="form-control form-control-lg" />
