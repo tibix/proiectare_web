@@ -7,7 +7,7 @@
 	require_once 'classes/Article.php';
 
 	if(logged_in()){
-		print_r($_SESSION);
+		//show article contents
 	} else {
 		?>
 			<div class="mx-5 my-5">

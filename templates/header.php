@@ -31,6 +31,26 @@
                             </a>
                         </li>
                         <li class="nav-item">
+                            <a class="nav-link" href="home.php">
+                                <i class="fa-solid fa-palette"></i> Arta
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.php">
+                                <i class="fa-solid fa-microchip"></i> Tehnica
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.php">
+                                <i class="fa-solid fa-flask"></i> Stiinta
+                            </a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link" href="home.php">
+                                <i class="fa-solid fa-vest"></i> Moda
+                            </a>
+                        </li>
+                        <li class="nav-item">
                             <a class="nav-link" href="#">
                                 <i class="fa-solid fa-question"></i> Despre noi
                             </a>
