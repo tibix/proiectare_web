@@ -24,8 +24,8 @@ DROP TABLE IF EXISTS `articles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `articles` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT,
-  `title` varchar(250) NOT NULL,
-  `content` text NOT NULL,
+  `title` varchar(250) CHARACTER SET utf8mb4 NOT NULL,
+  `content` text CHARACTER SET utf8mb4 NOT NULL,
   `date_created` datetime NOT NULL DEFAULT current_timestamp(),
   `date_modified` datetime DEFAULT NULL,
   `user_id` int(11) NOT NULL,
@@ -33,7 +33,7 @@ CREATE TABLE `articles` (
   `status_id` int(11) NOT NULL,
   PRIMARY KEY (`id`),
   UNIQUE KEY `title` (`title`)
-) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4;
+) ENGINE=MyISAM AUTO_INCREMENT=21 DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -227,4 +227,4 @@ UNLOCK TABLES;
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2023-11-02 14:17:10
+-- Dump completed on 2023-11-02 17:49:39

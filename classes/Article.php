@@ -9,14 +9,19 @@ class Article
         $this->db = $database;
     }
 
-    public function createArticle($title, $author, $content, $category)
+    public function createArticle($title, $content, $user_id, $category, $status_id=NULL)
     {
         $title = $this->db->escapeString($title);
-        $author = $this->db->escapeString($author);
         $content = $this->db->escapeString($content);
+        $user_id = $this->db->escapeString($author);
         $category = $this->db->escapeString($category);
+        if ($status_id != NULL) {
+            $status_id = (int)$status_id;
+        } else {
+            $status_id = 1;
+        }
 
-        $sql = "INSERT INTO articles (title, author, content, category) VALUES ('$title', '$author', '$content', '$category')";
+        $sql = "INSERT INTO articles (title, author, content, category) VALUES ('$title', '$content', '$user_id', '$category', '$status_id')";
 
         return $this->db->query($sql);
     }
@@ -33,7 +38,7 @@ class Article
     public function getArticlesByCategory($category)
     {
         $category = $this->db->escapeString($category);
-        $sql = "SELECT * FROM articles WHERE category = '$category'";
+        $sql = "SELECT * FROM articles WHERE category_id = '$category'";
 
         $result = $this->db->query($sql);
         $articles = array();
@@ -49,11 +54,11 @@ class Article
     {
         $id = (int)$id;
         $title = $this->db->escapeString($title);
-        $author = $this->db->escapeString($author);
         $content = $this->db->escapeString($content);
         $category = $this->db->escapeString($category);
+        $author = $this->db->escapeString($author);
 
-        $sql = "UPDATE articles SET title='$title', author='$author', content='$content', category='$category' WHERE id = $id";
+        $sql = "UPDATE articles SET title='$title', user_id='$author', content='$content', category='$category' WHERE id = $id";
 
         return $this->db->query($sql);
     }

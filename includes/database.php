@@ -11,6 +11,8 @@ class Database
         if ($this->conn->connect_error) {
             die("Conexiunea la baza de date a eșuat: " . $this->conn->connect_error);
         }
+
+        $this->conn->set_charset('utf8');
     }
 
     public function query($sql)

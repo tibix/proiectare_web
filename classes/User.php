@@ -46,6 +46,15 @@ class User
         return $result->fetch_assoc();
     }
 
+    public function getAuthorById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT f_name, l_name FROM users WHERE id = $id";
+
+        $result = $this->db->query($sql);
+        return $result;
+    }
+
     public function getUsers($role = NULL)
     {
         if ($role) {
