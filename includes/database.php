@@ -6,7 +6,7 @@ class Database
 
     public function __construct()
     {
-        $this->conn = new mysqli("localhost", "root", "", "editorial");
+        $this->conn = new mysqli("localhost", "editorial", "editorial", "editorial");
 
         if ($this->conn->connect_error) {
             die("Conexiunea la baza de date a eșuat: " . $this->conn->connect_error);
