@@ -2,7 +2,7 @@
     session_start();
     require_once 'includes/config.php';
     require_once 'includes/database.php';
-    require_once 'classes/Article.php';
+    require_once 'classes/User.php';
 
     include 'templates/header.php';
 
@@ -11,23 +11,21 @@
         $password = NULL;
         $errors = array();
 
-        if(!empty($_POST['login'])) { $login = $_POST['login']; } else { $errors[] = "Login invalid!"; }
+        if(!empty($_POST['login'])) { $log_in = $_POST['login']; } else { $errors[] = "Login invalid!"; }
         if(!empty($_POST['password'])) { $password = $_POST['password']; } else { $errors[] = "Parola invalida!"; }
 
-        $db = new mysqli("localhost", "root", "root", "editorial");
-        $sql = "SELECT u_name, f_name, l_name, password, email, u_type_id FROM users WHERE email = '$login' OR u_name = '$login'";
+        $db = new Database();
+        $auth = new User($db);
+        $login = $auth->getUserByLogin($log_in);
 
-        $result = $db->query($sql);
-        if($result->num_rows > 0){
-            $row = $result->fetch_assoc();
-            $db->close();
-            if($row['password'] == md5($password)){
+        if(!empty($login)){
+            if($login['password'] == md5($password)){
                 // login user
-                $_SESSION['user'] = $row['u_name'];
-                $_SESSION['f_name'] = $row['f_name'];
-                $_SESSION['l_name'] = $row['l_name'];
-                $_SESSION['email'] = $row['email'];
-                $_SESSION['u_type_id'] = $row['u_type_id'];
+                $_SESSION['user'] = $login['u_name'];
+                $_SESSION['f_name'] = $login['f_name'];
+                $_SESSION['l_name'] = $login['l_name'];
+                $_SESSION['email'] = $login['email'];
+                $_SESSION['role'] = $login['role_id'];
                 $_SESSION['loggedin'] = TRUE;
                 redirect("home.php");
             } else {

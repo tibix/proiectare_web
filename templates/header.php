@@ -44,7 +44,7 @@
                         </ul>
                     <?php
                         if(logged_in()){
-                            if($_SESSION['u_type_id'] == 1){
+                            if($_SESSION['role'] == 1){
                         ?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -74,7 +74,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['u_type_id'] == 2) { ?>
+                        <?php } else if($_SESSION['role'] == 2) { ?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-pen"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
@@ -109,7 +109,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['u_type_id'] == 3) {?>
+                        <?php } else if($_SESSION['role'] == 3) {?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-tie"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
@@ -144,7 +144,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['u_type_id'] == 4) {?>
+                        <?php } else if($_SESSION['role'] == 4) {?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-ninja"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>

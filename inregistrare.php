@@ -2,10 +2,9 @@
 
 require_once 'includes/config.php';
 require_once 'includes/database.php';
-require_once 'classes/Article.php';
+require_once 'classes/User.php';
 
 include 'templates/header.php';
-
 
 if(isset($_POST['inregistrare'])){
     // validam forma
@@ -19,34 +18,33 @@ if(isset($_POST['inregistrare'])){
     if(!empty($_POST['u_password_c'])) { $password2 = $_POST['u_password_c']; } else { $errors[] = "Confirmare parola invalida!</br>"; }
     if($_POST['u_password'] !== $_POST['u_password_c']) { $errors[] = "Parolele nu coincid!</br>"; }
 
+    $db = new Database();
     $check_email = "SELECT email FROM users WHERE email = '$email'";
     $check_u_name = "SELECT u_name FROM users WHERE u_name = '$u_name'";
-    $db = new mysqli("localhost", "root", "root", "editorial");
     $result_email = $db->query($check_email);
     $result_u_name = $db->query($check_u_name);
+
     if($result_email->num_rows > 0){
         $errors[] = "Email-ul este deja folosit!</br>";
     }
+
     if($result_u_name->num_rows > 0){
         $errors[] = "Numele de utilizator este deja folosit!</br>";
     }
-    $db->close();
 
     if(empty($errors)){
-        // save data to DB
-        $db = new mysqli("localhost", "root", "root", "editorial");
         // convert password to MD5 encripted string
         $password = md5($password);
         $now = date('Y-m-d H:i:s');
-        $sql = "INSERT INTO users (u_name, f_name, l_name, email, password) VALUES ('$u_name', '$f_name', '$l_name', '$email', '$password');";
-        $db->query($sql);
-        if($db->affected_rows > 0){
+
+        $user = new User($db);
+
+        if($user->createUser($u_name, $f_name, $l_name, $email, $password, $now)) {
             $db->close();
             redirect("autentificare.php");
         } else {
-            echo $db->error;
+            $error[] = "Eroare la crearea contului! Va rugam incercati mai tarziu!";
         }
-
     } else {
         ?>
         <div class="alert alert-danger alert-dismissible fade show text-secondary" role="alert">
