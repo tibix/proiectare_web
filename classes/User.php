@@ -9,15 +9,32 @@ class User
         $this->db = $database;
     }
 
-    public function createUser($name, $email, $role)
+    public function createUser($u_name, $f_name, $l_name, $email, $password, $date_created, $role=NULL)
     {
-        $name = $this->db->escapeString($name);
+        $u_name = $this->db->escapeString($u_name);
+        $f_name = $this->db->escapeString($f_name);
+        $l_name = $this->db->escapeString($l_name);
         $email = $this->db->escapeString($email);
+        $password = $this->db->escapeString($password);
         $role = $this->db->escapeString($role);
+        $date_created = $this->db->escapeString($date_created);
 
-        $sql = "INSERT INTO users (name, email, role) VALUES ('$name', '$email', '$role')";
+        if($role == NULL){
+            $role = 1;
+        }
+
+        $sql = "INSERT INTO users (u_name, f_name, l_name, email, password, date_created, role_id) VALUES ('$u_name', '$f_name', '$l_name', '$email', '$password', '$date_created', '$role')";
 
         return $this->db->query($sql);
+    }
+
+    public function getUserByLogin($login)
+    {
+        $login = $this->db->escapeString($login);
+        $sql = "SELECT * FROM users WHERE u_name = '$login' OR email = '$login'";
+
+        $result = $this->db->query($sql);
+        return $result->fetch_assoc();
     }
 
     public function getUserById($id)
@@ -29,9 +46,15 @@ class User
         return $result->fetch_assoc();
     }
 
-    public function getUsers()
+    public function getUsers($role = NULL)
     {
-        $sql = "SELECT * FROM users";
+        if ($role) {
+            $role = $this->db->escapeString($role);
+            $sql = "SELECT * FROM users WHERE role_id = '$role'";
+        } else {
+            $sql = "SELECT * FROM users";
+        }
+
         $result = $this->db->query($sql);
         $users = array();
 
@@ -42,15 +65,25 @@ class User
         return $users;
     }
 
-    public function updateUser($id, $name, $email, $role)
+    public function updateUser($id, $u_name, $f_name, $l_name, $email, $role)
     {
         $id = (int)$id;
-        $name = $this->db->escapeString($name);
+        $u_name = $this->db->escapeString($u_name);
+        $f_name = $this->db->escapeString($f_name);
+        $l_name = $this->db->escapeString(l_name);
         $email = $this->db->escapeString($email);
         $role = $this->db->escapeString($role);
 
         $sql = "UPDATE users SET name='$name', email='$email', role='$role' WHERE id = $id";
+        return $this->db->query($sql);
+    }
 
+    public function updateUserPassword($id, $password)
+    {
+        $id = (int)$id;
+        $password = $this->db->escapeString($password);
+
+        $sql = "UPDATE users SET password='$password' WHERE id = $id";
         return $this->db->query($sql);
     }
 
