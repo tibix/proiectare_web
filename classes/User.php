@@ -79,11 +79,11 @@ class User
         $id = (int)$id;
         $u_name = $this->db->escapeString($u_name);
         $f_name = $this->db->escapeString($f_name);
-        $l_name = $this->db->escapeString(l_name);
+        $l_name = $this->db->escapeString($l_name);
         $email = $this->db->escapeString($email);
         $role = $this->db->escapeString($role);
 
-        $sql = "UPDATE users SET name='$name', email='$email', role='$role' WHERE id = $id";
+        $sql = "UPDATE users SET u_name='$u_name', email='$email', role_id='$role' WHERE id = $id";
         return $this->db->query($sql);
     }
 
