@@ -58,8 +58,8 @@
                     </ul>
                     <ul class="navbar-nav me-auto mb-2 mb-lg-0">
                             <form class="d-flex d-inline" action="search.php" method="GET">
-                                <input class="form-control me-2 w-100" type="search" name="search" placeholder="Search" aria-label="Search">
-                                <button class="btn btn-outline-light" type="submit">Search</button>
+                                <input class="form-control me-2 w-100" type="search" name="search" placeholder="Cauta..." aria-label="Search">
+                                <button class="btn btn-outline-light" type="submit">Cautare</button>
                             </form>
                         </ul>
                     <?php

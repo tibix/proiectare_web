@@ -19,6 +19,7 @@
 		foreach ($tech_selection as $article){
 			$autor = $user->getAuthorById($article['user_id']);
 			$category = $tech_articles->getCategoryById($article['category_id']);
+			$cat = $tech_articles->getCategoryById($category);
 			foreach ($autor as $a) { $author = $a['f_name'] . " " . $a['l_name']; };
 			?>
 				<div class="card mb-5">
@@ -50,7 +51,7 @@
 					</div>
 					<div class="card-body">
 						<h5 class="card-title"><?php echo "{$article['title']}"; ?></h5>
-						<a class="btn btn-outline-warning" href="autentificare.php">Citeste articolul</a>
+						<a class="btn btn-outline-warning" href="articol.php?id=<?=$article['id']?>">Citeste articolul</a>
 					</div>
 					<div class="card-footer">
 						<small class="text-muted">Postat la data: <?=$article['date_created'];?> in Categoria: <?=$cat?></small>
