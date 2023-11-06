@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * User class
+ */
+
 class User
 {
     private $db;
@@ -11,19 +15,21 @@ class User
 
     public function createUser($u_name, $f_name, $l_name, $email, $password, $date_created, $role=NULL)
     {
-        $u_name = $this->db->escapeString($u_name);
-        $f_name = $this->db->escapeString($f_name);
-        $l_name = $this->db->escapeString($l_name);
-        $email = $this->db->escapeString($email);
-        $password = $this->db->escapeString($password);
-        $role = $this->db->escapeString($role);
+        $u_name       = $this->db->escapeString($u_name);
+        $f_name       = $this->db->escapeString($f_name);
+        $l_name       = $this->db->escapeString($l_name);
+        $email        = $this->db->escapeString($email);
+        $password     = $this->db->escapeString($password);
+        $role         = $this->db->escapeString($role);
         $date_created = $this->db->escapeString($date_created);
 
         if($role == NULL){
             $role = 1;
         }
 
-        $sql = "INSERT INTO users (u_name, f_name, l_name, email, password, date_created, role_id) VALUES ('$u_name', '$f_name', '$l_name', '$email', '$password', '$date_created', '$role')";
+        $sql = "INSERT INTO 
+                users  (u_name, f_name, l_name, email, password, date_created, role_id) 
+                VALUES ('$u_name', '$f_name', '$l_name', '$email', md5('$password'), '$date_created', '$role')";
 
         return $this->db->query($sql);
     }
@@ -59,9 +65,9 @@ class User
     {
         if ($role) {
             $role = $this->db->escapeString($role);
-            $sql = "SELECT * FROM users WHERE role_id = '$role'";
+            $sql = "SELECT u*, r.role_type FROM users u JOIN roles r on u.role_id= r.id WHERE role_id = '$role'";
         } else {
-            $sql = "SELECT * FROM users";
+            $sql = "SELECT u.*, r.role_type FROM users u JOIN roles r ON u.role_id = r.id";
         }
 
         $result = $this->db->query($sql);
@@ -92,7 +98,7 @@ class User
         $id = (int)$id;
         $password = $this->db->escapeString($password);
 
-        $sql = "UPDATE users SET password='$password' WHERE id = $id";
+        $sql = "UPDATE users SET password=md5('$password') WHERE id = $id";
         return $this->db->query($sql);
     }
 
@@ -100,6 +106,52 @@ class User
     {
         $id = (int)$id;
         $sql = "DELETE FROM users WHERE id = $id";
+
+        return $this->db->query($sql);
+    }
+
+    public function setToken($id)
+    {
+        $id = (int)$id;
+        $token = generateToken();
+
+        $sql = "UPDATE users SET token='$token' WHERE id = $id";
+
+        return $this->db->query($sql);
+    }
+
+    public function getToken($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT token FROM users WHERE id = $id";
+
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
+        $token = $row['token'];
+        
+        return $token;
+    }
+
+    public function hasToken($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT token FROM users WHERE id = $id";
+
+        $result = $this->db->query($sql);
+        $row = $result->fetch_assoc();
+        $token = $row['token'];
+
+        if ($token) {
+            return true;
+        } else {
+            return false;
+        }
+    }
+
+    public function deleteToken($id)
+    {
+        $id = (int)$id;
+        $sql = "UPDATE users SET token='' WHERE id = $id";
 
         return $this->db->query($sql);
     }

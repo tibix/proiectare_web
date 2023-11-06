@@ -24,3 +24,9 @@ function redirect($url)
         echo '</noscript>'; exit;
     }
 }
+
+function generateToken()
+{
+    $token = bin2hex(random_bytes(64));
+    return $token;
+}

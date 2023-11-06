@@ -1,44 +1,51 @@
-Users
-  id - PK
-  username
-  first_name
-  last_name
-  email
-  password
-  token
-  user_type_id - FK
-  date_created
-  last_login
+## articles ##
+  id             - U INT(10) NOT NULL PK AI
+  title          - VARCHAR(250) NOT NULL UNIQUE
+  content        - TEXT NOT NULL
+  date_created   - DATETIME NOT NULL - default current_timestamp
+  date_modified  - DATETIME
+  featured       - INT(1) NOT NULL - default 0
+  user_id        - INT(11) NOT NULL FK - users.id
+  category_id    - INT(11) NOT NULL FK - categories.id
+  status_id      - INT(11) NOT NULL FK - status.id
 
-User_Type
-  id - PK
-  user_type (administrator, user, journalist, editor)
-  description
+## categories ##
+  id             - U INT(10) NOT NULL PK AI
+  category_name  - VARCAHR(20) NOT NULL UNIQUE [arta, tehnica, stiinta, moda]
+  description    - VARCHAR(2000)
 
-Categories
-  id - PK
-  category_name (artistic, technic, science, fashion)
-  description
+## comments ##
+  id             - U INT(10) NOT NULL PK AI
+  content        - VARCHAR(400) NOT NULL
+  date_created   - DATETIME NOT NULL - default current_timestamp
+  user_id        - INT(11) NOT NULL FK - users.id
+  article_id     - INT(11) NOT NULL FK - articles.id
+  parent_id      - INT(11) FK - comments.id (self join)  
 
-Status
-  id -PK
-  status (published, unpublished, draft, archived)
-  description
+## roles ##
+  id             - U INT(11) NOT NUL PK AI
+  role_type      - VARCAHR(15) NOT NULL UNIQUE [administrator, utilizator, jurnalist, editor]
+  description    - VARCHAR(300)
 
-Articole
-  id - PK
-  title
-  content
-  date_created
-  date_modified
-  user_id - FK
-  category_id -FK
-  status_id (published, unpublished, draft, archived)
+## status ##
+  id             - U INT NOT NULL PK AI
+  status         - VARCHAR(15) NOT NULL UNIQUE [Publicat, Nepublicat, Draft, Arhivat]
+  description    - VARCHAR(300)
 
-Comments
-  id - PK
-  content
-  date_created
-  date_modified
-  user_id - FK
-  article_id - FK
+## users ## 
+  id             - U INT(11) NOT NULL PK AI 
+  u_name         - VARCAHR(20) UNIQUE NOT NULL
+  f_name         - VARCHAR(100) NOT NULL
+  l_name         - VARCAHR(100) NOT NULL
+  email          - VARCAHR(50) UNIQUE NOT NULL
+  password       - VARCHAR(128) NOT NULL
+  token          - VARCHAR(255)
+  role_id        - INT(11) NOT NULL DEFAULT 1 FK - roled.id
+  date_created   - DATETIME NOT NULL - default current_timestamp
+  last_login     - DATETIME 
+
+
+
+
+
+

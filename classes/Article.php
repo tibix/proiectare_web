@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * Article class
+ */
+
 class Article
 {
     private $db;
@@ -7,6 +11,20 @@ class Article
     public function __construct(Database $database)
     {
         $this->db = $database;
+    }
+
+    public function getFeaturedArticles()
+    {
+        $sql = "SELECT * FROM articles WHERE status_id = 1 AND featured = 1";
+
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
     }
 
     public function getCategoryById($id)
