@@ -1,5 +1,5 @@
 <?php
-    include(dirname(__DIR__).'/includes/utils.php');
+    include(dirname(__DIR__).'/core/utils.php');
 ?>
 <!DOCTYPE html>
 <html>

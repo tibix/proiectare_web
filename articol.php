@@ -3,8 +3,8 @@
 session_start();
 
 include 'templates/header.php';
-require_once 'includes/config.php';
-require_once 'includes/database.php';
+require_once 'core/config.php';
+require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 require_once 'classes/User.php';
 
