@@ -96,4 +96,19 @@ class Article
 
         return $this->db->query($sql);
     }
+
+    public function searchArticles($search)
+    {
+        $search = $this->db->escapeString($search);
+        $sql = "SELECT * FROM articles WHERE title LIKE '%$search%' OR content LIKE '%$search%'";
+
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
 }
