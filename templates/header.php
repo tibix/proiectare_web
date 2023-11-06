@@ -31,12 +31,12 @@
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="home.php">
+                            <a class="nav-link" href="arta.php">
                                 <i class="fa-solid fa-palette"></i> Arta
                             </a>
                         </li>
                         <li class="nav-item">
-                            <a class="nav-link" href="home.php">
+                            <a class="nav-link" href="tech.php">
                                 <i class="fa-solid fa-microchip"></i> Tehnica
                             </a>
                         </li>

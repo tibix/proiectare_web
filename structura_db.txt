@@ -13,14 +13,17 @@ Users
 User_Type
   id - PK
   user_type (administrator, user, journalist, editor)
+  description
 
 Categories
   id - PK
   category_name (artistic, technic, science, fashion)
+  description
 
 Status
   id -PK
   status (published, unpublished, draft, archived)
+  description
 
 Articole
   id - PK

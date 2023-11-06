@@ -9,11 +9,37 @@ class Article
         $this->db = $database;
     }
 
+    public function getCategoryById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT category_name FROM categories WHERE id = $id";
+
+        $result = $this->db->query($sql);
+        while ($row = $result->fetch_assoc()) {
+            $category = $row['category_name'];
+        }
+        return $category;
+    }
+
+    public function getAllArticles()
+    {
+        $sql = "SELECT * FROM articles";
+
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
+
     public function createArticle($title, $content, $user_id, $category, $status_id=NULL)
     {
         $title = $this->db->escapeString($title);
         $content = $this->db->escapeString($content);
-        $user_id = $this->db->escapeString($author);
+        $user_id = $this->db->escapeString($user_id);
         $category = $this->db->escapeString($category);
         if ($status_id != NULL) {
             $status_id = (int)$status_id;

@@ -9,16 +9,16 @@
 
 	$db = new Database();
 	$user = new User($db);
-	$tech_articles = new Article($db);
-	$tech_selection = $tech_articles->getAllArticles();
-	
+	$tech = new Article($db);
+	$articles = $tech->getArticlesByCategory(2);
 	
 	if(logged_in()){
 		//show article contents
 		?> <div class="container"><div class="mx-5 my-5"><div class="card-deck"> <?php
-		foreach ($tech_selection as $article){
+		foreach ($articles as $article){
 			$autor = $user->getAuthorById($article['user_id']);
-			$category = $tech_articles->getCategoryById($article['category_id']);
+			$category = (int)$article['category_id'];
+			$cat = $tech->getCategoryById($category);
 			foreach ($autor as $a) { $author = $a['f_name'] . " " . $a['l_name']; };
 			?>
 				<div class="card mb-5">
@@ -38,10 +38,10 @@
 		?> </div> </div> </div> <?php
 	} else {
 		?> <div class="container"><div class="mx-5 my-5"><div class="card-deck"> <?php
-		foreach ($tech_selection as $article){
+		foreach ($articles as $article){
 			$autor = $user->getAuthorById($article['user_id']);
 			$category = (int)$article['category_id'];
-			$cat = $tech_articles->getCategoryById($category);
+			$cat = $tech->getCategoryById($category);
 			foreach ($autor as $a) { $author = $a['f_name'] . " " . $a['l_name']; };
 			?>
 				<div class="card mb-5">
