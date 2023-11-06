@@ -20,7 +20,6 @@ if(logged_in()){
 	foreach ($tech_selection as $article){
 		$autor = $user->getAuthorById($article['user_id']);
 		$category = $tech_articles->getCategoryById($article['category_id']);
-		$cat = $tech_articles->getCategoryById($category);
 		foreach ($autor as $a) { $author = $a['f_name'] . " " . $a['l_name']; };
 		?>
 			<div class="card mb-5">
@@ -32,7 +31,7 @@ if(logged_in()){
 					<p class="card-text"><?php echo "{$article['content']}";?></p>
 				</div>
 				<div class="card-footer">
-					<small class="text-muted">Postat la data:  <?=$article['date_created'];?> in Categoria: <?=$cat?></small>
+					<small class="text-muted">Postat la data:  <?=$article['date_created'];?> in Categoria: <?=$category?></small>
 				</div>
 			</div>
 		<?php
@@ -42,8 +41,7 @@ if(logged_in()){
 	?> <div class="container"><div class="mx-5 my-5"><div class="card-deck"> <?php
 	foreach ($tech_selection as $article){
 		$autor = $user->getAuthorById($article['user_id']);
-		$category = (int)$article['category_id'];
-		$cat = $tech_articles->getCategoryById($category);
+		$category = $tech_articles->getCategoryById($article['category_id']);
 		foreach ($autor as $a) { $author = $a['f_name'] . " " . $a['l_name']; };
 		?>
 			<div class="card mb-5">
@@ -55,7 +53,7 @@ if(logged_in()){
 					<a class="btn btn-outline-warning" href="articol.php?id=<?=$article['id']?>">Citeste articolul</a>
 				</div>
 				<div class="card-footer">
-					<small class="text-muted">Postat la data: <?=$article['date_created'];?> in Categoria: <?=$cat?></small>
+					<small class="text-muted">Postat la data: <?=$article['date_created'];?> in Categoria: <?=$category?></small>
 				</div>
 			</div>
 		<?php

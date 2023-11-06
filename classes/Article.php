@@ -33,15 +33,22 @@ class Article
         $sql = "SELECT category_name FROM categories WHERE id = $id";
 
         $result = $this->db->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            $category = $row['category_name'];
-        }
+        
+        $row = $result->fetch_assoc();
+        
+        $category = $row['category_name'];
+        
         return $category;
     }
 
-    public function getAllArticles()
+    public function getAllArticles($user_id=NULL)
     {
-        $sql = "SELECT * FROM articles";
+        if ($user_id != NULL) {
+            $user_id = (int)$user_id;
+            $sql = "SELECT * FROM articles WHERE user_id = $user_id";
+        } else {
+            $sql = "SELECT * FROM articles";
+        }
 
         $result = $this->db->query($sql);
         $articles = array();

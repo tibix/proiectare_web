@@ -22,11 +22,12 @@ if(isset($_POST['autentificare'])){
     if(!empty($login)){
         if($login['password'] == md5($password)){
             // login user
+            $_SESSION['user_id'] = $login['id'];
             $_SESSION['user'] = $login['u_name'];
             $_SESSION['f_name'] = $login['f_name'];
             $_SESSION['l_name'] = $login['l_name'];
             $_SESSION['email'] = $login['email'];
-            $_SESSION['role'] = $login['role_id'];
+            $_SESSION['role'] = $login['role_type'];
             $_SESSION['loggedin'] = TRUE;
             redirect("home.php");
         } else {

@@ -1,4 +1,5 @@
 <?php
+    include(dirname(__DIR__).'/core/config.php');
     include(dirname(__DIR__).'/core/utils.php');
 ?>
 <!DOCTYPE html>
@@ -64,7 +65,7 @@
                         </ul>
                     <?php
                         if(logged_in()){
-                            if($_SESSION['role'] == 1){
+                            if($_SESSION['role'] == 'utilizator'){
                         ?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
@@ -94,7 +95,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['role'] == 2) { ?>
+                        <?php } else if($_SESSION['role'] == 'jurnalist') { ?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-pen"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
@@ -129,7 +130,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['role'] == 3) {?>
+                        <?php } else if($_SESSION['role'] == 'editor') {?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-tie"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
@@ -164,7 +165,7 @@
                                 <li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
                             </ul>
                         </div>
-                        <?php } else if($_SESSION['role'] == 4) {?>
+                        <?php } else if($_SESSION['role'] == 'administrator') {?>
                         <div class="btn-group">
                             <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
                                 <i class="fa-solid fa-user-ninja"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
