@@ -11,7 +11,8 @@ if(logged_in()){
     $db = new Database();
     $arts = new Article($db);
 
-    include 'templates/'.$_SESSION['role'].'.php';
+    if($_SESSION['role'] != 'utilizator')
+        include 'templates/'.$_SESSION['role'].'.php';
 } else {
     redirect("autentificare.php");
 }
