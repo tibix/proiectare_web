@@ -6,127 +6,164 @@
 
 class Article
 {
-    private $db;
+	private $db;
 
-    public function __construct(Database $database)
-    {
-        $this->db = $database;
-    }
+	public function __construct(Database $database)
+	{
+		$this->db = $database;
+	}
 
-    public function getFeaturedArticles()
-    {
-        $sql = "SELECT * FROM articles WHERE status_id = 1 AND featured = 1";
+	public function getFeaturedArticles()
+	{
+		$sql = "SELECT * FROM articles WHERE status_id = 1 AND featured = 1";
 
-        $result = $this->db->query($sql);
-        $articles = array();
+		$result = $this->db->query($sql);
+		$articles = array();
 
-        while ($row = $result->fetch_assoc()) {
-            $articles[] = $row;
-        }
+		while ($row = $result->fetch_assoc()) {
+			$articles[] = $row;
+		}
 
-        return $articles;
-    }
+		return $articles;
+	}
 
-    public function getCategoryById($id)
-    {
-        $id = (int)$id;
-        $sql = "SELECT category_name FROM categories WHERE id = $id";
+	public function isOwner($id, $user_id){
+		$id = (int)$id;
+		$user_id = (int)$user_id;
+		
+		$sql = "SELECT user_id FROM articles WHERE id = $id";
 
-        $result = $this->db->query($sql);
-        while ($row = $result->fetch_assoc()) {
-            $category = $row['category_name'];
-        }
-        return $category;
-    }
+		$result = $this->db->query($sql);
+		$row = $result->fetch_assoc();
 
-    public function getAllArticles()
-    {
-        $sql = "SELECT * FROM articles";
+		if ($row['user_id'] == $user_id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
 
-        $result = $this->db->query($sql);
-        $articles = array();
+	public function getCategories()
+	{
+		$sql = "SELECT id, category_name FROM categories";
 
-        while ($row = $result->fetch_assoc()) {
-            $articles[] = $row;
-        }
+		$result = $this->db->query($sql);
+		$categories = array();
 
-        return $articles;
-    }
+		while ($row = $result->fetch_assoc()) {
+			$categories[] = $row;
+		}
 
-    public function createArticle($title, $content, $user_id, $category, $status_id=NULL)
-    {
-        $title = $this->db->escapeString($title);
-        $content = $this->db->escapeString($content);
-        $user_id = $this->db->escapeString($user_id);
-        $category = $this->db->escapeString($category);
-        if ($status_id != NULL) {
-            $status_id = (int)$status_id;
-        } else {
-            $status_id = 1;
-        }
+		return $categories;
+	}
 
-        $sql = "INSERT INTO articles (title, author, content, category) VALUES ('$title', '$content', '$user_id', '$category', '$status_id')";
+	public function getCategoryById($id)
+	{
+		$id = (int)$id;
+		$sql = "SELECT category_name FROM categories WHERE id = $id";
 
-        return $this->db->query($sql);
-    }
+		$result = $this->db->query($sql);
 
-    public function getArticleById($id)
-    {
-        $id = (int)$id;
-        $sql = "SELECT * FROM articles WHERE id = $id";
+		$row = $result->fetch_assoc();
 
-        $result = $this->db->query($sql);
-        return $result->fetch_assoc();
-    }
+		$category = $row['category_name'];
 
-    public function getArticlesByCategory($category)
-    {
-        $category = $this->db->escapeString($category);
-        $sql = "SELECT * FROM articles WHERE category_id = '$category'";
+		return $category;
+	}
 
-        $result = $this->db->query($sql);
-        $articles = array();
+	public function getAllArticles($user_id=NULL)
+	{
+		if ($user_id != NULL) {
+			$user_id = (int)$user_id;
+			$sql = "SELECT * FROM articles WHERE user_id = $user_id";
+		} else {
+			$sql = "SELECT * FROM articles";
+		}
 
-        while ($row = $result->fetch_assoc()) {
-            $articles[] = $row;
-        }
+		$result = $this->db->query($sql);
+		$articles = array();
 
-        return $articles;
-    }
+		while ($row = $result->fetch_assoc()) {
+			$articles[] = $row;
+		}
 
-    public function updateArticle($id, $title, $author, $content, $category)
-    {
-        $id = (int)$id;
-        $title = $this->db->escapeString($title);
-        $content = $this->db->escapeString($content);
-        $category = $this->db->escapeString($category);
-        $author = $this->db->escapeString($author);
+		return $articles;
+	}
 
-        $sql = "UPDATE articles SET title='$title', user_id='$author', content='$content', category='$category' WHERE id = $id";
+	public function createArticle($title, $content, $user_id, $category, $status_id=NULL)
+	{
+		$title = $this->db->escapeString($title);
+		$content = $this->db->escapeString($content);
+		$user_id = $this->db->escapeString($user_id);
+		$category = $this->db->escapeString($category);
+		if ($status_id != NULL) {
+			$status_id = (int)$status_id;
+		} else {
+			$status_id = 3;
+		}
 
-        return $this->db->query($sql);
-    }
+		$sql = "INSERT INTO articles (title, content, user_id, category_id, status_id) VALUES ('$title', '$content', '$user_id', '$category', '$status_id')";
 
-    public function deleteArticle($id)
-    {
-        $id = (int)$id;
-        $sql = "DELETE FROM articles WHERE id = $id";
+		return $this->db->query($sql);
+	}
 
-        return $this->db->query($sql);
-    }
+	public function getArticleById($id)
+	{
+		$id = (int)$id;
+		$sql = "SELECT * FROM articles WHERE id = $id";
 
-    public function searchArticles($search)
-    {
-        $search = $this->db->escapeString($search);
-        $sql = "SELECT * FROM articles WHERE title LIKE '%$search%' OR content LIKE '%$search%'";
+		$result = $this->db->query($sql);
+		return $result->fetch_assoc();
+	}
 
-        $result = $this->db->query($sql);
-        $articles = array();
+	public function getArticlesByCategory($category)
+	{
+		$category = $this->db->escapeString($category);
+		$sql = "SELECT * FROM articles WHERE category_id = '$category'";
 
-        while ($row = $result->fetch_assoc()) {
-            $articles[] = $row;
-        }
+		$result = $this->db->query($sql);
+		$articles = array();
 
-        return $articles;
-    }
+		while ($row = $result->fetch_assoc()) {
+			$articles[] = $row;
+		}
+
+		return $articles;
+	}
+
+	public function updateArticle($id, $title, $content, $category, $date_modified=NULL)
+	{	
+		$id = (int)$id;
+		$title = $this->db->escapeString($title);
+		$content = $this->db->escapeString($content);
+		$category = $this->db->escapeString($category);
+		$date_modified = $this->db->escapeString(date('Y-m-d H:i:s'));
+
+		$sql = "UPDATE articles SET title='$title', content='$content', category_id='$category', date_modified='$date_modified' WHERE id = $id";
+
+		return $this->db->query($sql);
+	}
+
+	public function deleteArticle($id)
+	{
+		$id = (int)$id;
+		$sql = "DELETE FROM articles WHERE id = $id";
+
+		return $this->db->query($sql);
+	}
+
+	public function searchArticles($search)
+	{
+		$search = $this->db->escapeString($search);
+		$sql = "SELECT * FROM articles WHERE title LIKE '%$search%' OR content LIKE '%$search%'";
+
+		$result = $this->db->query($sql);
+		$articles = array();
+
+		while ($row = $result->fetch_assoc()) {
+			$articles[] = $row;
+		}
+
+		return $articles;
+	}
 }

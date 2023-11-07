@@ -37,7 +37,7 @@ class User
     public function getUserByLogin($login)
     {
         $login = $this->db->escapeString($login);
-        $sql = "SELECT * FROM users WHERE u_name = '$login' OR email = '$login'";
+        $sql = "SELECT u.*, r.role_type FROM users u JOIN roles r ON u.role_id = r.id WHERE u_name = '$login' OR email = '$login'";
 
         $result = $this->db->query($sql);
         return $result->fetch_assoc();

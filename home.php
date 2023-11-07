@@ -8,13 +8,11 @@ require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 
 if(logged_in()){
-?>
+    $db = new Database();
+    $arts = new Article($db);
 
-<div class="mx-5 my-5">
-    <h1>Bun venit in contul tau <?php echo($_SESSION['f_name']. '  ' .$_SESSION['l_name']); ?></h1>
-</div>
-
-<?php
+    if($_SESSION['role'] != 'utilizator')
+        include 'templates/'.$_SESSION['role'].'.php';
 } else {
     redirect("autentificare.php");
 }
