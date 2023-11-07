@@ -35,9 +35,9 @@ usort($other_articles, "compare");
 		<div class="col-sm-8 bg-white mr-3">
 			<h1 class="text-center">Articole - <?=$_SESSION['l_name']. ' '. $_SESSION['f_name'];?></h1>
 			<div class="row mx-3">
-			<?php foreach($my_articles as $fa){
-				if($fa['featured'] == 1){
-			?>
+				<?php foreach($my_articles as $fa){
+					if($fa['featured'] == 1){
+				?>
 				<div class="col-sm-12">
 					<div class="card my-2">
 						<div class="card-header bg-warning">
@@ -51,7 +51,7 @@ usort($other_articles, "compare");
 						</div>
 					</div>
 				</div>
-			<?php } else { ?>
+				<?php } else { ?>
 				<div class="col-lg-4 d-flex align-items-stretch">
 					<div class="card my-2">
 						<div class="card-body">
@@ -62,29 +62,29 @@ usort($other_articles, "compare");
 						</div>
 					</div>
 				</div>
-			<?php } } if(!empty($drafts)) { ?>
-			<div class="row">
-			<?php foreach($drafts as $dr){?>
-				<div class="col-lg-4 d-flex align-items-stretch">
-					<div class="card my-2">
-						<div class="card-header text-white bg-danger">
-							Draft
-						</div>
-						<div class="card-body">
-							<h5 class="card-title"><?=$dr['title']?></h5>
-							<p class="card-text"><?=substr($dr['content'], 0, 100);?></p>
-							<a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-warning">Citeste</a>
-							<a href="articol_editor.php?id=<?=$dr['id']?>" class="btn btn-outline-secondary">Continua editarea</a>
+				<?php } } if(!empty($drafts)) { ?>
+				<div class="row">
+				<?php foreach($drafts as $dr){?>
+					<div class="col-lg-4 d-flex align-items-stretch">
+						<div class="card my-2">
+							<div class="card-header text-white bg-danger">
+								Draft
+							</div>
+							<div class="card-body">
+								<h5 class="card-title"><?=$dr['title']?></h5>
+								<p class="card-text"><?=substr($dr['content'], 0, 100);?></p>
+								<a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-warning">Citeste</a>
+								<a href="articol_editor.php?id=<?=$dr['id']?>" class="btn btn-outline-secondary">Continua editarea</a>
+							</div>
 						</div>
 					</div>
+				<?php } }?>
 				</div>
-			<?php } }?>
 			</div>
-			</div>
-		</div>
+		
 
 		<div class="col-sm-4 ml-3">
-		<h1 class="text-center">Alte articole</h1>
+			<h1 class="text-center">Alte articole</h1>
 			<div class="row mx-3">
 			<?php foreach($other_articles as $oa){
 				if($oa['featured'] == 1){
