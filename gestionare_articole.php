@@ -38,7 +38,7 @@ $articole = $arts->getAllArticles($_SESSION['user_id']);
                             <p class="card-text"><?=substr($articol['content'], 0, 100).' ...'?></p>
                             <a href="articol.php?id=<?=$articol['id']?>" class="btn btn-outline-secondary">Vezi Articol</a>
                             <hr>
-                            <a href="articol.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-pen"></i> Editeaza</a>
+                            <a href="articol_editor.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-pen"></i> Editeaza</a>
                             <a href="#" class="btn btn-outline-warning text-dark"><i class="fa fa-upload"></i> Publica</a>
                             <a href="sterge_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i> Sterge</a>
                         </div>
@@ -55,8 +55,6 @@ $articole = $arts->getAllArticles($_SESSION['user_id']);
         </div>
     </div>
 </div>
-<link rel="stylesheet" href="https://unpkg.com/@adminkit/core@latest/dist/css/app.css">
-<script src="https://unpkg.com/@adminkit/core@latest/dist/js/app.js"></script>
 <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.5.3/dist/js/bootstrap.bundle.min.js"></script>
 <?php include 'templates/footer.php'; ?>

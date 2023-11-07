@@ -27,6 +27,22 @@ class Article
 		return $articles;
 	}
 
+	public function isOwner($id, $user_id){
+		$id = (int)$id;
+		$user_id = (int)$user_id;
+		
+		$sql = "SELECT user_id FROM articles WHERE id = $id";
+
+		$result = $this->db->query($sql);
+		$row = $result->fetch_assoc();
+
+		if ($row['user_id'] == $user_id) {
+			return true;
+		} else {
+			return false;
+		}
+	}
+
 	public function getCategories()
 	{
 		$sql = "SELECT id, category_name FROM categories";
