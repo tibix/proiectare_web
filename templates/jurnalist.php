@@ -22,7 +22,7 @@ foreach($articles as $article)
 
 function compare($a, $b)
 {
-	return ($a['featured']< $b['featured']);
+	return ($b['featured']<=> $a['featured']);
 }
 
 usort($my_articles, "compare");

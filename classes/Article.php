@@ -83,10 +83,10 @@ class Article
 		if ($status_id != NULL) {
 			$status_id = (int)$status_id;
 		} else {
-			$status_id = 1;
+			$status_id = 3;
 		}
 
-		$sql = "INSERT INTO articles (title, author, content, category) VALUES ('$title', '$content', '$user_id', '$category', '$status_id')";
+		$sql = "INSERT INTO articles (title, content, user_id, category_id, status_id) VALUES ('$title', '$content', '$user_id', '$category', '$status_id')";
 
 		return $this->db->query($sql);
 	}
@@ -115,15 +115,15 @@ class Article
 		return $articles;
 	}
 
-	public function updateArticle($id, $title, $author, $content, $category)
-	{
+	public function updateArticle($id, $title, $content, $category, $date_modified=NULL)
+	{	
 		$id = (int)$id;
 		$title = $this->db->escapeString($title);
 		$content = $this->db->escapeString($content);
 		$category = $this->db->escapeString($category);
-		$author = $this->db->escapeString($author);
+		$date_modified = $this->db->escapeString(date('Y-m-d H:i:s'));
 
-		$sql = "UPDATE articles SET title='$title', user_id='$author', content='$content', category='$category' WHERE id = $id";
+		$sql = "UPDATE articles SET title='$title', content='$content', category_id='$category', date_modified='$date_modified' WHERE id = $id";
 
 		return $this->db->query($sql);
 	}

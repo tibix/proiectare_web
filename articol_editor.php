@@ -32,7 +32,14 @@ if(isset($_GET['id'])){
 	</div>
 <?php }
 	if(isset($_POST['salveaza']))
-		var_dump($_POST);
+	{
+		$arts->updateArticle($_GET['id'], $_POST['titlu'], nl2br($_POST['continut']), $_POST['category']);
+		if($arts){
+			redirect("home.php");
+		} else {
+			echo "Eroare la salvarea articolului!";
+		}
+	}
 	else {
 ?>
 	<div class="mx-2 my-3">
@@ -55,9 +62,10 @@ if(isset($_GET['id'])){
 				<label for="category" class="col-sm-2 col-form-label">Categorie</label>
 				<div class="col-sm-10">
 					<select class="form-select" id="category" name="category" aria-label="Default select example">
-					<option selected disabled>--Alege categoria aricolului--</option>
-						<?php foreach($categories as $category){ ?>
-							<option value="<?=$category['id']?>"><?=$category['category_name']?></option>
+						<?php foreach($categories as $category){ 
+							$selected = ($article['category_id'] == $category['id'] ?  " selected='selected' " : "");
+							?>
+							<option <?=$selected?> value="<?=$category['id']?>"><?=$category['category_name']?></option>
 						<?php }?>
 					</select>
 				</div>
@@ -71,7 +79,7 @@ if(isset($_GET['id'])){
 <script>
   tinymce.init({
     selector: 'textarea',
-    plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
+    plugins: 'ai tinycomments mentions anchor autolink charmap codesample emoticons  visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed permanentpen footnotes advtemplate advtable advcode editimage tableofcontents mergetags powerpaste tinymcespellchecker autocorrect a11ychecker typography inlinecss',
     toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | align lineheight | tinycomments | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
     tinycomments_mode: 'embedded',
     mergetags_list: [

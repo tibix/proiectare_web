@@ -15,7 +15,7 @@ $articles = $tech_articles->getAllArticles();
 
 function compare($a, $b)
 {
-	return ($a['featured']< $b['featured']);
+	return ($a['featured'] <=> $b['featured']);
 }
 
 usort($articles, "compare");
