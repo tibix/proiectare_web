@@ -33,7 +33,7 @@ usort($other_articles, "compare");
 <div class="container-fluid">
 	<div class="row my-3">
 		<div class="col-sm-8 bg-white mr-3">
-			<h1 class="text-center">Articole - <?=$_SESSION['l_name']. ' '. $_SESSION['f_name'];?></h1>
+			<h1 class="text-center">Articole Publicate</h1>
 			<div class="row mx-3">
 				<?php foreach($my_articles as $fa){
 					if($fa['featured'] == 1){
@@ -63,6 +63,7 @@ usort($other_articles, "compare");
 					</div>
 				</div>
 				<?php } } if(!empty($drafts)) { ?>
+				<hr><h1 class="text-center">Articole in Lucru</h1>
 				<div class="row">
 				<?php foreach($drafts as $dr){?>
 					<div class="col-lg-4 d-flex align-items-stretch">
@@ -81,7 +82,8 @@ usort($other_articles, "compare");
 				<?php } }?>
 				</div>
 			</div>
-		
+		</div>
+
 
 		<div class="col-sm-4 ml-3">
 			<h1 class="text-center">Alte articole</h1>
