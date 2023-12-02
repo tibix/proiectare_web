@@ -7,10 +7,13 @@ require_once 'core/config.php';
 require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 require_once 'classes/User.php';
+require_once 'classes/Favorite.php';
 
 $db = new Database();
 $user = new User($db);
 $tech = new Article($db);
+$fav = new Favorite($db);
+
 $articles = $tech->getArticlesByCategory(2);
 
 if(logged_in()){
@@ -32,6 +35,13 @@ if(logged_in()){
 				</div>
 				<div class="card-footer">
 					<small class="text-muted">Postat la data:  <?=$article['date_created'];?> in Categoria: <?=$cat?></small>
+                    <span class="float-end">
+                    <?php if($fav->isFavorite($article['id'])) { ?>
+                        <a class="btn btn-outline-danger" href="favorites.php?id=<?=$article['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
+                    <?php } else { ?>
+                        <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$article['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
+                    <?php } ?>
+                    </span>
 				</div>
 			</div>
 		<?php
@@ -52,6 +62,11 @@ if(logged_in()){
 				<div class="card-body">
 					<h5 class="card-title"><?php echo "{$article['title']}"; ?></h5>
 					<a class="btn btn-outline-warning" href="autentificare.php">Citeste articolul</a>
+                    <?php if($fav->isFavorite($article['id'])) { ?>
+                        <a class="btn btn-outline-danger" href="favorites.php?id=<?=$article['id']?>&action=remove"><i class="fa-solid fa-heart"></i></a>
+                    <?php } else { ?>
+                        <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$article['id']?>&action=add"><i class="fa-regular fa-heart"></i></a>
+                    <?php } ?>
 				</div>
 				<div class="card-footer">
 					<small class="text-muted">Postat la data: <?=$article['date_created'];?> in Categoria: <?=$cat?></small>

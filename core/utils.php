@@ -30,3 +30,47 @@ function generateToken()
     $token = bin2hex(random_bytes(64));
     return $token;
 }
+
+function idToCategory($id)
+{
+    switch($id){
+        case 1:
+            return "arta";
+            break;
+        case 2:
+            return "tehnica";
+            break;
+        case 3:
+            return "stiinta";
+            break;
+        case 4:
+            return "moda";
+            break;
+    }
+    return null;
+}
+
+function prety_dump($var)
+{
+    echo '<pre>';
+    var_dump($var);
+    echo '</pre>';
+}
+
+/**
+ * @param array $errors
+ * @return void
+ */
+function show_errors(array $errors): void
+{
+    foreach ($errors as $error) {
+        echo "<div class=\"alert alert-danger alert-dismissible text-secondary fade show text-center mb-1\" role=\"alert\">$error";
+        echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+    }
+}
+
+function show_success($message): void
+{
+    echo "<div class=\"alert alert-success alert-dismissible text-secondary fade show text-center mb-1\" role=\"alert\">$message";
+    echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
+}

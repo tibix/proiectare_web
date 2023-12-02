@@ -12,7 +12,7 @@ $db = new Database();
 $user = new User($db);
 $arts = new Article($db);
 $fav = new Favorite($db);
-$articles = $arts->getArticlesByCategory(1);
+$articles = $arts->getArticlesByCategory(4);
 
 if(logged_in()){
 	//show article contents

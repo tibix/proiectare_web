@@ -25,33 +25,40 @@
 				</button>
 				<div class="collapse navbar-collapse" id="navbarTogglerDemo01">
 					<a class="navbar-brand" href="index.php">Revista TAMS&trade;</a>
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0" data-bs-toggle="modal" data-bs-target="#aboutUsModal">
+					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
 						<li class="nav-item">
 							<a class="nav-link" href="home.php">
 								<i class="fa-solid fa-house"></i> Acasa
 							</a>
 						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="arta.php">
-								<i class="fa-solid fa-palette"></i> Arta
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="tech.php">
-								<i class="fa-solid fa-microchip"></i> Tehnica
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="home.php">
-								<i class="fa-solid fa-flask"></i> Stiinta
-							</a>
-						</li>
-						<li class="nav-item">
-							<a class="nav-link" href="home.php">
-								<i class="fa-solid fa-vest"></i> Moda
-							</a>
-						</li>
-						<li class="nav-item">
+                        <li class="nav-item dropdown">
+                            <a class="nav-link dropdown-toggle" href="#categorii" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+                                Categorii
+                            </a>
+                            <ul class="dropdown-menu" id="categorii">
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="tehnica.php">
+                                        <i class="fa-solid fa-microchip"></i> Tehnica
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="arta.php">
+                                        <i class="fa-solid fa-palette"></i> Arta
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="moda.php">
+                                        <i class="fa-solid fa-vest"></i> Moda
+                                    </a>
+                                </li>
+                                <li class="dropdown-item">
+                                    <a class="nav-link" href="stiinta.php">
+                                        <i class="fa-solid fa-flask"></i> Stiinta
+                                    </a>
+                                </li>
+                            </ul>
+                        </li>
+						<li class="nav-item" data-bs-toggle="modal" data-bs-target="#aboutUsModal"">
 							<a class="nav-link" href="#">
 								<i class="fa-solid fa-question"></i> Despre noi
 							</a>
@@ -223,9 +230,9 @@
 								<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
 							</div>
 							<div class="modal-body">
-								<h3>Ce este Revista IOT?</h3>
-								<p>Revista IOT este o platforma ce aduce impreuna jurnalisti, editori si consumatori.</p>
-								<h3>Pentru cine este platforma Revista IOT?</h3>
+								<h3>Ce este Revista TAMS&trade;?</h3>
+								<p>Revista TAMS&trade; este o platforma ce aduce impreuna atat jurnalisti, editori cat si consumatori de materiale legate de Tehnica, Arta, Moda si Stiinta.</p>
+								<h3>Pentru cine este platforma Revista TAMS&trade;?</h3>
 								<p>Platform noastra se adreseaza tuturor iubitorilor de stiinta, arta, tehnica si stinta, fie ca este consumator de articole sau chiar scriitor.</p>
 								<h3>Cum se foloseste acest produs?</h3>
 								<p>Utilizarea platformei este foarte facila.</p>
