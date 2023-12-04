@@ -37,33 +37,33 @@ if(!empty($_GET['id']))
         {
             if ($_GET['action'] === 'add')
             {
-                if($fav->isFavorite($bmi))
+                if($fav->isFavorite($bmi, $_SESSION['user_id']))
                 {
-                    $errors[] = 'This article is already added to favorites!';
+                    $errors[] = 'Acest articol este deja adaugat la favorite!';
                 } else {
                     $new_fav = $fav->addToFavorites($_SESSION['user_id'], $id);
                     if (!$new_fav) {
-                        $errors[] = 'Error adding article to favorites: ' . $new_fav;
+                        $errors[] = 'A aparut o eroare la adaugarea articolului la favorite: ' . $new_fav;
                     }
                 }
             }
 
             if ($_GET['action'] === 'remove')
             {
-                if($fav->isFavorite($bmi))
+                if($fav->isFavorite($bmi, $_SESSION['user_id']))
                 {
                     $new_fav = $fav->removeFromFavorites($_SESSION['user_id'], $id);
                     if (!$new_fav) {
-                        $errors[] = 'Error removing article from favorites: ' . $new_fav;
+                        $errors[] = 'A aparut o eroarea la stergerea articolului din favorite: ' . $new_fav;
                     }
                 } else {
-                    $errors[] = 'This article is not part of favorites!';
+                    $errors[] = 'Acest articol nu face parte din favorite!';
                 }
             }
         }
     } else {
         $bmi = null;
-        $errors[] = "This article does not exists!";
+        $errors[] = "Acest articol nu exista!";
     }
 
     if(empty($errors))

@@ -62,11 +62,11 @@ class Favorite
 
         if($limit) {
             $sql = "SELECT favorites.id, favorites.owner_id, favorites.article_id, articles.title, articles.content, articles.user_id FROM favorites
-                JOIN articles
-                ON favorites.article_id = articles.id
-                WHERE favorites.owner_id = $id
-                ORDER BY favorites.article_id
-                LIMIT $limit";
+                    JOIN articles
+                    ON favorites.article_id = articles.id
+                    WHERE favorites.owner_id = $id
+                    ORDER BY favorites.article_id
+                    LIMIT $limit";
         } else {
             $sql = "SELECT favorites.id, favorites.owner_id, favorites.article_id, articles.title, articles.content, articles.user_id FROM favorites
                     JOIN articles
@@ -105,11 +105,12 @@ class Favorite
      * @param $id
      * @return bool
      */
-    public function isFavorite($id)
+    public function isFavorite($id, $user_id)
     {
         $id = (int)$id;
+        $user_id = (int)$user_id;
 
-        $sql = "SELECT article_id FROM favorites WHERE article_id = $id";
+        $sql = "SELECT article_id FROM favorites WHERE article_id = $id AND owner_id = $user_id";
         $result = $this->db->query($sql);
         $row = $result->fetch_assoc();
         if($row)
