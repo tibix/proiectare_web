@@ -7,6 +7,11 @@ require_once 'classes/User.php';
 
 include 'templates/header.php';
 
+if(logged_in())
+{
+    redirect('home.php');
+}
+
 if(isset($_POST['autentificare'])){
     $email = NULL;
     $password = NULL;

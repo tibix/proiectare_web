@@ -18,8 +18,8 @@ include 'templates/header.php';
 function invalid_message()
 {
     echo '<div class="alert alert-danger alert-dismissible fade show text-secondary" role="alert">';
-    echo '<p>Invalid link!</p>';
-    echo '<p>Please check your email for the correct link, or try to generate a new  <a href="resetare_parola.php" class="text-dark fw-bold">recovery link</a>!</p>';
+    echo 'Link invalid!';
+    echo 'Verifica link-ul primit si asigur-te ca e copiat corect, sa incearca sa re-generezi un <a href="resetare_parola.php" class="text-dark fw-bold">link de recuperarea</a>!';
     echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
     echo '</div>';
 }
@@ -58,15 +58,15 @@ if(isset($_GET['user_id']) && isset($_GET['token']))
                 $errors = array();
 
                 if(empty($_POST['new_password'])){
-                    $errors[] .= '<p>Please enter your new password!</p>';
+                    $errors[] = 'Introdu noua parola!';
                 }
 
                 if(empty($_POST['new_password_c'])){
-                    $errors[] .= '<p>Please confirm your new password!</p>';
+                    $errors[] = 'Confirma noua parola!';
                 }
 
                 if($_POST['new_password'] != $_POST['new_password_c']){
-                    $errors[] .= '<p>Passwords do not match!</p>';
+                    $errors[] = 'Cele doua parole sunt diferite!';
                 }
 
                 if(!empty($errors))
@@ -75,11 +75,7 @@ if(isset($_GET['user_id']) && isset($_GET['token']))
                 } else {
                     $user->updateUserPassword($user_id, $_POST['new_password']);
                     $user->deleteToken($user_id);
-                    echo '<div class="alert alert-success alert-dismissible fade show text-secondary" role="alert">';
-                    echo '<p>Your password has been updated successfully!</p>';
-                    echo '<p>Click <a href="autentificare.php" class="text-secondary fw-bold">aici</a> pentru pagina de login.</p>';
-                    echo '<button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button></div>';
-                    echo '</div>';
+                    show_success("Parola a fost modificata cu success! Click <a href='autentificare.php'>aici</a> pentru a merge la autentificare!");
                     die();
                 }
             }

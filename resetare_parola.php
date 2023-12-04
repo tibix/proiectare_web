@@ -13,23 +13,19 @@ if(logged_in()){
         $errors = array();
 
         if(empty($_POST['current_password'])){
-            $errors[] .= '<p>Please enter your current password!</p>';
+            $errors[] = 'Introdu parola curenta!';
         }
 
         if(empty($_POST['new_password'])){
-            $errors[] .= '<p>Please enter your new password!</p>';
+            $errors[] = 'Introdu noua parola!';
         }
 
         if(empty($_POST['new_password_c'])){
-            $errors[] .= '<p>Please confirm your new password!</p>';
+            $errors[] = 'Confirma noua parola!';
         }
 
         if($_POST['new_password'] != $_POST['new_password_c']){
-            $errors[] .= '<p>Your new passwords do not match!</p>';
-        }
-
-        if($_POST['current_password'] == $_POST['new_password']){
-            $errors[] .= '<p>Password must be different!</p>';
+            $errors[] = 'Noua parola nu e confirmata corect!';
         }
 
         $db = new Database();
@@ -37,11 +33,11 @@ if(logged_in()){
 
         $current_user = $user->getUserById($_SESSION['user_id']);
         if($current_user['password'] != md5($_POST['current_password'])){
-            $errors[] .= '<p>Your current password is incorrect</p>';
+            $errors[] = 'Parola curenta este incorecta!';
         }
 
-        if($current_user['password'] == md5($_POST['new_password'])){
-            $errors[] .= '<p>Your new password must be different from your current password!</p>';
+        if($_POST['current_password'] == $_POST['new_password']){
+            $errors[] = 'Vechea si noua parola trebuie sa fie diferite!';
         }
 
         if(!empty($errors))
@@ -49,11 +45,8 @@ if(logged_in()){
             show_errors($errors);
         } else {
             $user->updateUserPassword($_SESSION['user_id'], $_POST['new_password']);
-            echo '<div class="alert alert-success alert-dismissible fade show text-secondary" role="alert">';
-            echo '<p>Your password has been updated</p>';
-            echo '</div>';
-            sleep(2);
-            redirect('home.php');
+            show_success("Parola a fost resetata cu succes! Click <a href='autentificare.php'>aici</a> pentru autentificare.");
+            die();
         }
     }
     include 'templates/t_password_reset.php';
@@ -63,13 +56,13 @@ if(logged_in()){
         $errors = array();
 
         if(!isset($_POST['email']) || empty($_POST['email'])){
-            $errors[] .= '<p>Please enter your email address!</p>';
+            $errors[] = 'Please enter your email address!';
         } else {
             $db = new Database();
             $user = new User($db);
             $user_data = $user->getUserByLogin($_POST['email']);
             if(empty($user_data)){
-                $errors[] .= '<p>Sorry, we can\'t find that email address!</p>';
+                $errors[] = 'Sorry, we can\'t find that email address!';
             }
         }
 
@@ -84,10 +77,10 @@ if(logged_in()){
             $reset_link = "http://" . $_SERVER['HTTP_HOST'];
             foreach($uri as $element){
                 if($element != end($uri))
-                    $reset_link .= $element . "/";
+                    $reset_link = $element . "/";
             }
 
-            $reset_link .= "recuperare_cont.php?user_id=" . $user_data['id'] . "&token=" . $user->getToken($user_data['id']);
+            $reset_link = "recuperare_cont.php?user_id=" . $user_data['id'] . "&token=" . $user->getToken($user_data['id']);
             sleep(2);
             redirect($reset_link);
         }
