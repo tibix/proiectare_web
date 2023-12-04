@@ -2,9 +2,10 @@
 
 function logged_in(){
     if(isset($_SESSION['loggedin'])){
-        $loggedin=TRUE;
-        return $loggedin;
+        return true;
     }
+
+    return false;
 }
 
 function redirect($url)

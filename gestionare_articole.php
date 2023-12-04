@@ -40,7 +40,7 @@ $articole = $arts->getAllArticles($_SESSION['user_id']);
                             <hr>
                             <a href="articol_editor.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-pen"></i> Editeaza</a>
                             <a href="#" class="btn btn-outline-warning text-dark"><i class="fa fa-upload"></i> Publica</a>
-                            <a href="sterge_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-danger ml-3"><i class="fa fa-trash"></i> Sterge</a>
+                            <a href="sterge_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-danger ml-3 <?php if($articol['status_id'] != 3) { echo " disabled"; }?>" ><i class="fa fa-trash"></i> Sterge</a>
                         </div>
                     </div>
                 </div>

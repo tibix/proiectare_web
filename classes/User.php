@@ -64,8 +64,7 @@ class User
     public function getUsers($role = NULL)
     {
         if ($role) {
-            $role = $this->db->escapeString($role);
-            $sql = "SELECT u*, r.role_type FROM users u JOIN roles r on u.role_id= r.id WHERE role_id = '$role'";
+            $sql = "SELECT u.*, r.role_type FROM users u JOIN roles r on u.role_id= r.id WHERE role_id IN (". implode(',', $role) .")";
         } else {
             $sql = "SELECT u.*, r.role_type FROM users u JOIN roles r ON u.role_id = r.id";
         }
