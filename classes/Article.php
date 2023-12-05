@@ -73,8 +73,9 @@ class Article
 
 	public function getAllArticles($user_id=NULL)
 	{
-		if ($user_id != NULL) {
-			$user_id = (int)$user_id;
+
+        $user_id = (int)$user_id ? $user_id : null;
+        if ($user_id) {
 			$sql = "SELECT * FROM articles WHERE user_id = $user_id";
 		} else {
 			$sql = "SELECT * FROM articles";

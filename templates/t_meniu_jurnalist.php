@@ -14,7 +14,7 @@
             <a class="dropdown-item" href="gestionare_articole.php">
                 <i class="fa-solid fa-list-ul"></i>
                 Articolele mele
-                <span class="badge text-bg-danger"> <i class="fa fa-bell"></i></span>
+                <span class="badge text-bg-danger"> <i class="fa fa-bell"></i> 3</span>
             </a>
         </li>
         <li><hr class="dropdown-divider"></li>

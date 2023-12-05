@@ -16,10 +16,6 @@ require_once 'classes/Favorite.php';
 require_once 'classes/User.php';
 
 if(logged_in()){
-    $db = new Database();
-    $arts = new Article($db);
-    $fav = new Favorite($db);
-
     include 'templates/t_'.$_SESSION['role'].'.php';
 } else {
     redirect("autentificare.php");
