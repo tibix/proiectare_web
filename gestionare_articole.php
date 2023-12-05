@@ -20,16 +20,21 @@ $articole = $arts->getAllArticles($_SESSION['user_id']);
 <div class="container-fluid">
     <div class="row my-3">
         <div class="col-sm-9 bg-white mr-3">
-            <div class="accordion" id="example">
-            <?php foreach($articole as $articol): ?>
-                <div class="card bg-dark my-3">
-                    <div class="card-header">
-                        <a class="text-light fs-4" data-toggle="collapse" href="#item<?=$articol['id']?>">
+            <div class="accordion" id="articles">
+            <?php foreach($articole as $index => $articol): ?>
+                <div class="accordion-item">
+                    <h2 class="accordion-header" id="hitem<?=$articol['id']?>">
+                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#item<?=$articol['id']?>" aria-expanded="true" aria-controls="item<?=$articol['id']?>">
                             <?=$articol['title']?>
-                        </a>
-                    </div>
-                    <div id="item<?=$articol['id']?>" class="collapse" data-parent="#example">
-                        <div class="card-body bg-light">
+                            <?php
+                            if($articol['status_id'] == 3){
+                                echo "<span class=\"text-small text-danger\">&nbsp;(Draft)</span>";
+                            }
+                            ?>
+                        </button>
+                    </h2>
+                    <div id="item<?=$articol['id']?>" class="accordion-collapse collapse show" aria-labelledby="hitem<?=$articol['id']?>">
+                        <div class="accordion-body">
                             <p class="card-text">
                                 <strong>Categorie: </strong><?=$arts->getCategoryById($articol['category_id'])?>
                                 <strong>Publicat: </strong><?=$articol['date_created']?>
@@ -50,7 +55,6 @@ $articole = $arts->getAllArticles($_SESSION['user_id']);
         <div class="col-sm-3 bg-white mr-3">
             <h1>Data utile:</h1> 
             <div class="row mx-3">
-                Some data
             </div>
         </div>
     </div>

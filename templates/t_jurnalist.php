@@ -100,7 +100,7 @@ usort($other_articles, "compare");
 						<h5 class="card-title"><?=$oa['title']?></h5>
 						<p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
 						<a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
-                        <?php if($fav->isFavorite($oa['id'])) { ?>
+                        <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])) { ?>
                             <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
                         <?php } else { ?>
                             <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
@@ -115,7 +115,7 @@ usort($other_articles, "compare");
 						<h5 class="card-title"><?=$oa['title']?></h5>
 						<p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
 						<a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
-                        <?php if($fav->isFavorite($oa['id'])) { ?>
+                        <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])) { ?>
                             <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
                         <?php } else { ?>
                             <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>

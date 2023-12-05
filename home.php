@@ -20,7 +20,7 @@ if(logged_in()){
     $arts = new Article($db);
     $fav = new Favorite($db);
 
-    include 'templates/'.$_SESSION['role'].'.php';
+    include 'templates/t_'.$_SESSION['role'].'.php';
 } else {
     redirect("autentificare.php");
 }
