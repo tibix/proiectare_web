@@ -64,156 +64,16 @@
 							</a>
 						</li>
 					</ul>
-					<ul class="navbar-nav me-auto mb-2 mb-lg-0">
-							<form class="d-flex d-inline" action="search.php" method="GET">
-								<input class="form-control me-2 w-100" type="search" name="search" placeholder="Cauta..." aria-label="Search">
-								<button class="btn btn-outline-light" type="submit">Cautare</button>
-							</form>
-						</ul>
+                    <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                        <form class="d-flex d-inline" action="search.php" method="GET">
+                            <input class="form-control me-2 w-100" type="search" name="search" placeholder="Cauta..." aria-label="Search">
+                            <button class="btn btn-outline-light" type="submit">Cautare</button>
+                        </form>
+                    </ul>
 					<?php
 						if(logged_in()){
-							if($_SESSION['role'] == 'utilizator'){
-						?>
-						<div class="btn-group">
-							<button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa-solid fa-user"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
-								<li>
-									<a class="dropdown-item" href="favorites.php">
-										<i class="fa-solid fa-bookmark"></i>
-										Favorite
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-									<a class="dropdown-item" href="editare_profil.php">
-										<i class="fa-solid fa-pen"></i>
-										Editare Profil
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="resetare_parola.php">
-										<i class="fa-solid fa-key"></i>
-										Resetarea Parola
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
-							</ul>
-						</div>
-						<?php } else if($_SESSION['role'] == 'jurnalist') { ?>
-						<div class="btn-group">
-							<button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa-solid fa-user-pen"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
-								<li>
-									<a class="dropdown-item" href="articol_nou.php">
-										<i class="fa-solid fa-newspaper"></i>
-										Articol nou
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="gestionare_articole.php">
-										<i class="fa-solid fa-list-ul"></i>
-										Articolele mele
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-									<a class="dropdown-item" href="editare_profil.php">
-										<i class="fa-solid fa-pen"></i>
-										Editare Profil
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="resetare_parola.php">
-										<i class="fa-solid fa-key"></i>
-										Resetarea Parola
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
-							</ul>
-						</div>
-						<?php } else if($_SESSION['role'] == 'editor') {?>
-						<div class="btn-group">
-							<button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa-solid fa-user-tie"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
-								<li>
-									<a class="dropdown-item" href="gestiune_jurnalisti.php">
-										<i class="fa-solid fa-users"></i>
-										Gestioneaza jurnalisti
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="gestioneaza_articole.php">
-										<i class="fa-solid fa-list-ul"></i>
-										Gestioneaza Articole
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-									<a class="dropdown-item" href="editare_profil.php">
-										<i class="fa-solid fa-pen"></i>
-										Editare Profil
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="resetare_parola.php">
-										<i class="fa-solid fa-key"></i>
-										Resetarea Parola
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
-							</ul>
-						</div>
-						<?php } else if($_SESSION['role'] == 'administrator') {?>
-						<div class="btn-group">
-							<button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
-								<i class="fa-solid fa-user-ninja"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
-							</button>
-							<ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
-								<li>
-									<a class="dropdown-item" href="admin/">
-										<i class="fa-solid fa-users"></i>
-										Gestioneaza Utilizatori
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="admin/">
-										<i class="fa-solid fa-user-plus"></i>
-										Gestioneaza Articole
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="admin/adauga_editor.php">
-										<i class="fa-solid fa-user-plus"></i>
-										Adauga editor
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li>
-									<a class="dropdown-item" href="editare_profil.php">
-										<i class="fa-solid fa-pen"></i>
-										Editare Profil
-									</a>
-								</li>
-								<li>
-									<a class="dropdown-item" href="resetare_parola.php">
-										<i class="fa-solid fa-key"></i>
-										Resetarea Parola
-									</a>
-								</li>
-								<li><hr class="dropdown-divider"></li>
-								<li><a class="dropdown-item" href="deconectare.php"><span><i class="fa-solid fa-arrow-right-from-bracket"> </i> Deconectare</span></a></li>
-							</ul>
-						</div>
-						<?php } } else { ?>
+                            include 't_meniu_' . $_SESSION['role'] .'.php';
+                        } else { ?>
 						<a class="text-decoration-none text-white" href="autentificare.php">
 							<button class="btn btn-outline-light outline-light mx-2" type="submit">Autentifcare</button>
 						</a>
