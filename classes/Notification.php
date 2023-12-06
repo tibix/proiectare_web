@@ -48,4 +48,43 @@ class Notification
 
         return $alerts;
     }
+
+    public function getArticleNotification($id)
+    {
+        $id = (int)$id;
+
+        $sql = "SELECT * FROM notifications WHERE article_id = $id AND status = 'new'";
+
+        $result = $this->db->query($sql);
+        $alerts = array();
+
+        while($row = $result->fetch_assoc()) {
+            $alerts[] = $row;
+        }
+
+        return $alerts;
+    }
+
+    public function hasNotification($article_id, $owner_id=null)
+    {
+        $article_id = (int)$article_id;
+        $owner_id = (int)$owner_id ? $owner_id : null;
+
+        if($owner_id) {
+            $sql = "SELECT * FROM notifications WHERE article_id = $article_id AND owner_id = $owner_id AND status='new'";
+        } else {
+            $sql = "SELECT * FROM notifications WHERE article_id = $article_id AND status='new'";
+        }
+
+        $result = $this->db->query($sql);
+        $notifs = array();
+
+        while($row = $result->fetch_assoc())
+        {
+            $notifs[] = $row;
+        }
+
+        return $notifs;
+    }
+
 }

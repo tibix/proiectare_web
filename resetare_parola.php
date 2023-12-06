@@ -4,7 +4,9 @@ session_start();
 
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
+require_once 'classes/Notification.php';
 
+include 'core/utils.php';
 include 'templates/header.php';
 
 if(logged_in()){
@@ -56,13 +58,13 @@ if(logged_in()){
         $errors = array();
 
         if(!isset($_POST['email']) || empty($_POST['email'])){
-            $errors[] = 'Please enter your email address!';
+            $errors[] = 'Campul Email nu poate fii gol!';
         } else {
             $db = new Database();
             $user = new User($db);
             $user_data = $user->getUserByLogin($_POST['email']);
             if(empty($user_data)){
-                $errors[] = 'Sorry, we can\'t find that email address!';
+                $errors[] = 'Aceasta adresa de e-mail nu a fost gasita!';
             }
         }
 

@@ -1,7 +1,21 @@
+<?php
+
+$db = new Database();
+$notify = new Notification($db);
+
+$notifications = $notify->getNotifications($_SESSION['user_id']);
+$notif_count = count($notifications);
+
+?>
+
 <div class="btn-group">
     <button type="button" class="btn btn-outline-dark dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
         <i class="fa-solid fa-user-pen"> </i>  <?php echo($_SESSION['f_name'] . ' ' .$_SESSION['l_name']); ?>
-        <span class="badge text-bg-danger"> <i class="fa fa-bell"></i></span>
+        <?php
+            if($notif_count > 0){
+                echo '<span class="badge text-bg-danger"> <i class="fa fa-bell"></i></span>';
+            }
+        ?>
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
@@ -14,7 +28,11 @@
             <a class="dropdown-item" href="gestionare_articole.php">
                 <i class="fa-solid fa-list-ul"></i>
                 Articolele mele
-                <span class="badge text-bg-danger"> <i class="fa fa-bell"></i> 3</span>
+                <?php
+                if($notif_count > 0){
+                    echo '<span class="badge text-bg-danger"> <i class="fa fa-bell"></i> '. $notif_count .'</span>';
+                }
+                ?>
             </a>
         </li>
         <li><hr class="dropdown-divider"></li>

@@ -1,7 +1,3 @@
-<?php
-	include(dirname(__DIR__).'/core/config.php');
-	include(dirname(__DIR__).'/core/utils.php');
-?>
 <!DOCTYPE html>
 <html>
 <head>

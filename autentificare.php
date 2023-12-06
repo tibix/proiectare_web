@@ -1,12 +1,14 @@
 <?php
 session_start();
 
-require_once 'core/config.php';
+include 'core/utils.php';
+
 require_once 'classes/Database.php';
+require_once 'classes/Article.php';
+require_once 'classes/Notification.php';
 require_once 'classes/User.php';
 
 include 'templates/header.php';
-
 if(logged_in())
 {
     redirect('home.php');

@@ -2,8 +2,11 @@
 
 session_start();
 
+include 'core/utils.php';
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
+require_once 'classes/Notification.php';
+
 include 'templates/header.php';
 
 if (!logged_in()) {

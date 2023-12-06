@@ -3,7 +3,9 @@
 $db = new Database();
 $arts = new Article($db);
 $fav = new Favorite($db);
+$notify = new Notification($db);
 
+$notifications = $notify->getNotifications($_SESSION['user_id']);
 $articles = $arts->getAllArticles();
 
 $my_articles = [];
@@ -12,9 +14,9 @@ $other_articles = [];
 
 foreach($articles as $article)
 {
-    if($article['status_id'] != 3) {
+    if($article['status_id'] == 1) {
         $other_articles[] = $article;
-    } else{
+    } else if ($article['status_id'] == 2){
         $drafts[] = $article;
     }
 
@@ -39,14 +41,21 @@ usort($other_articles, "compare");
                     <?php foreach($drafts as $dr):?>
                         <div class="col-lg-4 d-flex align-items-stretch">
                             <div class="card my-2">
-                                <div class="card-header text-white bg-danger">
-                                    Draft
+                                <div class="card-header text-white bg-info">
+                                    De verificat
+                                    <?php
+                                    $notifications = $notify->hasNotification($dr['id'], $_SESSION['user_id']);
+
+                                    if($notifications)
+                                    {
+                                        echo "<span class=\"badge text-bg-danger\"> <i class=\"fa fa-bell\"></i>". count($notifications) ." </span>&nbsp;&nbsp;";
+                                    }
+                                    ?>
                                 </div>
                                 <div class="card-body">
                                     <h5 class="card-title"><?=$dr['title']?></h5>
                                     <p class="card-text"><?=substr($dr['content'], 0, 100);?></p>
-                                    <a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-warning">Citeste</a>
-                                    <a href="articol_editor.php?id=<?=$dr['id']?>" class="btn btn-outline-secondary">Continua editarea</a>
+                                    <a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-info">Verifica Articol</a>
                                 </div>
                             </div>
                         </div>
@@ -56,7 +65,7 @@ usort($other_articles, "compare");
         </div>
 
         <div class="col-sm-4 ml-3">
-            <h1 class="text-center">Alte articole</h1>
+            <h1 class="text-center">Articole active</h1>
             <div class="row mx-3">
                 <?php foreach($other_articles as $oa){
                     if($oa['featured'] == 1){

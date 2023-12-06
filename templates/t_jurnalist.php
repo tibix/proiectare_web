@@ -1,5 +1,13 @@
 <?php
 
+$db = new Database();
+$arts = new Article($db);
+$fav = new Favorite($db);
+$notify = new Notification($db);
+
+$notifications = $notify->getNotifications($_SESSION['user_id']);
+$notif_count = count($notifications);
+
 $articles = $arts->getAllArticles();
 
 $my_articles = [];

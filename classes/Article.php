@@ -167,4 +167,31 @@ class Article
 
 		return $articles;
 	}
+
+    public function setStatus($id, $status)
+    {
+        $id = (int)$id;
+        $status = (int)$status;
+
+        $sql = "UPDATE articles SET status_id = $status WHERE id = $id";
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
+
+    public function getArticleByStatus($status)
+    {
+        $status = (int)$status;
+        $sql = "SELECT * FROM articles WHERE status_id = $status";
+
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
+
 }

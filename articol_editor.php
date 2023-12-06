@@ -2,10 +2,13 @@
 
 session_start();
 
-include 'templates/header.php';
-require_once 'core/config.php';
+include 'core/utils.php';
+
 require_once 'classes/Database.php';
 require_once 'classes/Article.php';
+require_once 'classes/Notification.php';
+
+include 'templates/header.php';
 
 if(!logged_in()){
 	redirect("autentificare.php");
