@@ -53,7 +53,7 @@ if($_SESSION['role'] == 'jurnalist'){
                         <div class="accordion-body">
                             <p class="card-text">
                                 <strong>Categorie: </strong><?=$arts->getCategoryById($articol['category_id'])?>
-                                <strong>Publicat: </strong><?=$articol['date_created']?>
+                                <strong>Creat: </strong><?=$articol['date_created']?>
                             </p>
                             <hr>
                             <p class="card-text"><?=substr($articol['content'], 0, 100).' ...'?></p>

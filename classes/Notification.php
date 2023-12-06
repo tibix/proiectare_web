@@ -22,17 +22,6 @@ class Notification
         return $this->db->query($sql);
     }
 
-    public function changeNotification($id, $message, $status=null)
-    {
-        $id = (int)$id;
-        $message = $this->db->escapeString($message);
-        $status = $this->db->escapeString($status) ? $status : 'done';
-
-        $sql = "UPDATE notifications SET status = '$status', message = '$message' WHERE id = $id";
-
-        return $this->db->query($sql);
-    }
-
     public function getNotifications($user)
     {
         $user = (int)$user;
@@ -49,6 +38,23 @@ class Notification
         return $alerts;
     }
 
+    public function getAllArticleNotifications($id)
+    {
+        $id = (int)$id;
+
+        $sql = "SELECT * FROM notifications WHERE article_id = $id";
+
+        $result = $this->db->query($sql);
+        $notifications = array();
+
+        while($row = $result->fetch_assoc()) {
+            $notifications[] = $row;
+        }
+
+        return $notifications;
+    }
+
+
     public function getArticleNotification($id)
     {
         $id = (int)$id;
@@ -56,13 +62,24 @@ class Notification
         $sql = "SELECT * FROM notifications WHERE article_id = $id AND status = 'new'";
 
         $result = $this->db->query($sql);
-        $alerts = array();
+        $notifications = array();
 
         while($row = $result->fetch_assoc()) {
-            $alerts[] = $row;
+            $notifications[] = $row;
         }
 
-        return $alerts;
+        return $notifications;
+    }
+
+    public function changeNotification($id, $message, $status=null)
+    {
+        $id = (int)$id;
+        $message = $this->db->escapeString($message);
+        $status = $this->db->escapeString($status) ? $status : 'done';
+
+        $sql = "UPDATE notifications SET status = '$status', message = '$message' WHERE id = $id";
+
+        return $this->db->query($sql);
     }
 
     public function hasNotification($article_id, $owner_id=null)

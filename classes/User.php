@@ -34,6 +34,14 @@ class User
         return $this->db->query($sql);
     }
 
+    public function getEditorId()
+    {
+        $sql = "SELECT id FROM users WHERE role_id = 3";
+        $result = $this->db->query($sql);
+
+        return $result->fetch_assoc();
+    }
+
     public function getUserByLogin($login)
     {
         $login = $this->db->escapeString($login);
