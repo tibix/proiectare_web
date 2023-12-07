@@ -76,11 +76,16 @@ function show_success($message): void
     echo "<button type=\"button\" class=\"btn-close\" data-bs-dismiss=\"alert\" aria-label=\"Close\"></button></div>";
 }
 
-function dates_difference($date)
+function some_time_ago($date)
 {
-    $date1 = new DateTime($date);
-    $date2 = new DateTime("now");
-    $interval = $date1->diff($date2);
+    $time1 = new DateTime($date);
+    $now = new DateTime();
+    $interval = $time1->diff($now,true);
 
-    echo $interval->d." zile, ".$interval->h." ore, ".$interval->i ." minute, si " . $interval->s ." secunde";
+    if ($interval->y) echo $interval->y . ' ani';
+    elseif ($interval->m) echo $interval->m . ' luni';
+    elseif ($interval->d) echo $interval->d . ' zile';
+    elseif ($interval->h) echo $interval->h . ' ore';
+    elseif ($interval->i) echo $interval->i . ' minute';
+    else echo "mai putin de un minut";
 }

@@ -42,7 +42,7 @@ class Notification
     {
         $id = (int)$id;
 
-        $sql = "SELECT * FROM notifications WHERE article_id = $id";
+        $sql = "SELECT * FROM notifications WHERE article_id = $id ORDER BY date_created DESC";
 
         $result = $this->db->query($sql);
         $notifications = array();
@@ -102,6 +102,17 @@ class Notification
         }
 
         return $notifs;
+    }
+
+    public function getUserById($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT u_name FROM users WHERE id=$id";
+
+        $row = $this->db->query($sql);
+        $result = $row->fetch_assoc();
+
+        return $result['u_name'];
     }
 
 }

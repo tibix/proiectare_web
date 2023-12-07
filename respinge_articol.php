@@ -42,7 +42,7 @@ if(isset($_POST))
             if($notificari)
             {
                 // inchidem notificarea curenta si generam o notificare noua cu mesajul postat
-                $inchide_notificarea = $notify->changeNotification($notificari[0]['id'], "Jurnalistul are modificari de facut", "done");
+                $inchide_notificarea = $notify->changeNotification($notificari[0]['id'], $notificari[0]['message'], "done");
                 if($inchide_notificarea)
                 {
                     // generam o noua notificare
@@ -50,25 +50,25 @@ if(isset($_POST))
                     if($notificare_noua){
                         //schimbam statusul articolului
                         $arts->setStatus($articol['id'], 5);
-                        show_success("Articolul a fost rejectat cu succes! Click <a href='home.php' class='text-dark'>aici</a> pentru a reveni la pagina principala.");
+                        show_success("Articolul a fost respins cu succes! Click <a href='home.php' class='text-dark'>aici</a> pentru a reveni la pagina principala.");
                     } else {
-                        show_errors(['A aparut o eroare in procesul de rejectarea: '. $notificare_noua.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
+                        show_errors(['A aparut o eroare in procesul de respingere: '. $notificare_noua.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
                     }
                 } else {
-                    show_errors(['A aparut o eroare in procesul de rejectarea: '. $inchide_notificarea.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
+                    show_errors(['A aparut o eroare in procesul de respingere: '. $inchide_notificarea.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
                 }
             } else {
                 // generam o notificare cu mesajul postat
                 $notificare_noua = $notify->createNotification($message, $articol['user_id'], $_SESSION['user_id'], $articol['id']);
                 if($notificare_noua){
                     $arts->setStatus($articol['id'], 5);
-                    show_success("Articolul a fost rejectat cu succes! Click <a href='home.php' class='text-dark'>aici</a> pentru a reveni la pagina principala.");
+                    show_success("Articolul a fost respins cu succes! Click <a href='home.php' class='text-dark'>aici</a> pentru a reveni la pagina principala.");
                 } else {
-                    show_errors(['A aparut o eroare in procesul de rejectarea: '. $notificare_noua.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
+                    show_errors(['A aparut o eroare in procesul de respingerea: '. $notificare_noua.'.', 'Click <a href="home.php" class="text-dark">aici</a> pentru a reveni la pagina principala.']);
                 }
             }
         } else {
-            show_errors(['Articolul invalid nu poate fii validat si rejectat!']);
+            show_errors(['Articolul invalid nu poate fii validat si respins!']);
         }
     } else {
         show_errors(['Acest id nu reprezinta un articol valid!', 'Mergeti <a href="'. $_SERVER['HTTP_REFERER'] .'" class="text-dark">inapoi</a> pentru a remedia situatia!']);

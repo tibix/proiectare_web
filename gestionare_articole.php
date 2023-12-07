@@ -9,8 +9,8 @@ require_once 'classes/Article.php';
 require_once 'classes/Notification.php';
 
 include 'templates/header.php';
-if(!logged_in() && $_SESSION['user_role'] == 1){
-    redirect("home.php");
+if(!logged_in() || $_SESSION['role'] == 1){
+    redirect("autentificare.php");
 }
 
 $db = new Database();
@@ -24,6 +24,14 @@ if($_SESSION['role'] == 'jurnalist'){
 $notify = new Notification($db);
 
 if($_SESSION['role'] == 'jurnalist'){
+    if(!$articole){
+    ?>
+        <div class="container-fluid my-4">
+            <h3 class="text-center">Momentan nu ai nici un articol creat!</h3>
+            <h4 class="text-center">Creaza un <a href="articol_nou.php" class="btn btn-outline-warning text-dark text-decoration-underline"><i class="fa fa-newspaper"></i> articol nou</a> !</h4>
+        </div>
+    <?php
+    } else {
 ?>
 <div class="container-fluid">
     <div class="row my-3">
@@ -60,7 +68,7 @@ if($_SESSION['role'] == 'jurnalist'){
                             <a href="articol.php?id=<?=$articol['id']?>" class="btn btn-outline-secondary">Vezi Articol</a>
                             <hr>
                             <a href="articol_editor.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-pen"></i> Editeaza</a>
-                            <a href="publica_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-upload"></i> Publica</a>
+                            <a href="publica_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark <?php if($articol['status_id'] == 1 || $articol['status_id'] == 4) { echo "disabled"; }?>" ><i class="fa fa-upload"></i> Cere Publicare</a>
                             <a href="sterge_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-danger ml-3 <?php if($articol['status_id'] != 3) { echo " disabled"; }?>" ><i class="fa fa-trash"></i> Sterge</a>
                         </div>
                     </div>
@@ -70,7 +78,7 @@ if($_SESSION['role'] == 'jurnalist'){
         </div>
     </div>
 </div>
-    <?php
+    <?php }
 } else { ?>
     <div class="container-fluid">
         <div class="row my-3">

@@ -37,6 +37,13 @@ $notif_count = count($notifications);
         </li>
         <li><hr class="dropdown-divider"></li>
         <li>
+            <a class="dropdown-item" href="favorites.php">
+                <i class="fa-solid fa-bookmark"></i>
+                Favorite
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
             <a class="dropdown-item" href="editare_profil.php">
                 <i class="fa-solid fa-pen"></i>
                 Editare Profil

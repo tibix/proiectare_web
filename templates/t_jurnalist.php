@@ -41,97 +41,100 @@ usort($other_articles, "compare");
 <div class="container-fluid">
 	<div class="row my-3">
 		<div class="col-sm-8 bg-white mr-3">
-			<h1 class="text-center">Articole Publicate</h1>
-			<div class="row mx-3">
-				<?php foreach($my_articles as $fa){
-					if($fa['featured'] == 1){
-				?>
-				<div class="col-sm-12">
-					<div class="card my-2">
-						<div class="card-header bg-warning">
-							Featured
-						</div>
-						<div class="card-body">
-							<h5 class="card-title"><?=$fa['title']?></h5>
-							<p class="card-text"><?=substr($fa['content'], 0, 100).' ...';?></p>
-							<a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
-							<a href="articol_editor.php?id=<?=$fa['id']?>" class="btn btn-outline-secondary">Editeaza</a>
-						</div>
-					</div>
-				</div>
-				<?php } else { ?>
-				<div class="col-lg-4 d-flex align-items-stretch">
-					<div class="card my-2">
-						<div class="card-body">
-							<h5 class="card-title"><?=$fa['title']?></h5>
-							<p class="card-text"><?=substr($fa['content'], 0, 100).' ...';?></p>
-							<a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
-							<a href="articol_editor.php?id=<?=$fa['id']?>" class="btn btn-outline-secondary">Editeaza</a>
-						</div>
-					</div>
-				</div>
-				<?php } } if(!empty($drafts)) { ?>
-				<hr><h1 class="text-center">Articole in Lucru</h1>
-				<div class="row">
-				<?php foreach($drafts as $dr){?>
-					<div class="col-lg-4 d-flex align-items-stretch">
-						<div class="card my-2">
-							<div class="card-header text-white bg-danger">
-								Draft
-							</div>
-							<div class="card-body">
-								<h5 class="card-title"><?=$dr['title']?></h5>
-								<p class="card-text"><?=substr($dr['content'], 0, 100);?></p>
-								<a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-warning">Citeste</a>
-								<a href="articol_editor.php?id=<?=$dr['id']?>" class="btn btn-outline-secondary">Continua editarea</a>
-							</div>
-						</div>
-					</div>
-				<?php } }?>
+            <?php if(!empty($drafts)):?>
+            <h1 class="text-center">Articole in Lucru</h1>
+            <div class="row">
+                <?php foreach($drafts as $dr):?>
+                    <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="card my-2">
+                            <div class="card-header text-white bg-danger">
+                                Draft
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?=$dr['title']?></h5>
+                                <p class="card-text"><?=substr($dr['content'], 0, 100);?></p>
+                                <a href="articol.php?id=<?=$dr['id']?>" class="btn btn-outline-warning">Citeste</a>
+                                <a href="articol_editor.php?id=<?=$dr['id']?>" class="btn btn-outline-secondary">Continua editarea</a>
+                            </div>
+                        </div>
+                    </div>
+                <?php endforeach; ?>
+            <?php endif; ?>
+            <?php if(!empty($my_articles)):?>
+            <hr><h1 class="text-center">Articole Publicate</h1>
+            <div class="row mx-3">
+                <?php foreach($my_articles as $fa):?>
+                    <?php if($fa['featured'] == 1): ?>
+                    <div class="col-sm-12">
+                        <div class="card my-2">
+                            <div class="card-header bg-warning">
+                                Featured
+                            </div>
+                            <div class="card-body">
+                                <h5 class="card-title"><?=$fa['title']?></h5>
+                                <p class="card-text"><?=substr($fa['content'], 0, 100).' ...';?></p>
+                                <a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
+                                <a href="articol_editor.php?id=<?=$fa['id']?>" class="btn btn-outline-secondary">Editeaza</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php else: ?>
+                    <div class="col-lg-4 d-flex align-items-stretch">
+                        <div class="card my-2">
+                            <div class="card-body">
+                                <h5 class="card-title"><?=$fa['title']?></h5>
+                                <p class="card-text"><?=substr($fa['content'], 0, 100).' ...';?></p>
+                                <a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
+                                <a href="articol_editor.php?id=<?=$fa['id']?>" class="btn btn-outline-secondary">Editeaza</a>
+                            </div>
+                        </div>
+                    </div>
+                    <?php endif; ?>
+                <?php endforeach; ?>
+            <?php endif;?>
 				</div>
 			</div>
 		</div>
 
-
 		<div class="col-sm-4 ml-3">
 			<h1 class="text-center">Alte articole</h1>
 			<div class="row mx-3">
-			<?php foreach($other_articles as $oa){
-				if($oa['featured'] == 1){
-			?>
-			<div class="col-sm-12">
-				<div class="card my-2">
-					<div class="card-header bg-dark text-light">
-						Featured
-					</div>
-					<div class="card-body">
-						<h5 class="card-title"><?=$oa['title']?></h5>
-						<p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
-						<a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
-                        <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])) { ?>
-                            <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
-                        <?php } else { ?>
-                            <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
-                        <?php } ?>
-					</div>
-				</div>
-			</div>
-			<?php } else { ?>
-			<div class="col-lg-6 d-flex align-items-stretch">
-				<div class="card my-2">
-					<div class="card-body">
-						<h5 class="card-title"><?=$oa['title']?></h5>
-						<p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
-						<a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
-                        <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])) { ?>
-                            <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
-                        <?php } else { ?>
-                            <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
-                        <?php } ?>
-					</div>
-				</div>
-			</div>
-			<?php } }?>
+			<?php foreach($other_articles as $oa):?>
+				<?php if($oa['featured'] == 1): ?>
+                <div class="col-sm-12">
+                    <div class="card my-2">
+                        <div class="card-header bg-dark text-light">
+                            Featured
+                        </div>
+                        <div class="card-body">
+                            <h5 class="card-title"><?=$oa['title']?></h5>
+                            <p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
+                            <a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
+                            <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])):?>
+                                <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-heart"></i></a>
+                            <?php else: ?>
+                                <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-heart"></i></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+			    <?php else: ?>
+                <div class="col-lg-6 d-flex align-items-stretch">
+                    <div class="card my-2">
+                        <div class="card-body">
+                            <h5 class="card-title"><?=$oa['title']?></h5>
+                            <p class="card-text"><?=substr($oa['content'], 0, 100).' ...';?></p>
+                            <a href="articol.php?id=<?=$oa['id']?>" class="btn btn-outline-warning">Citeste</a>
+                            <?php if($fav->isFavorite($oa['id'], $_SESSION['user_id'])):?>
+                                <a class="btn btn-outline-danger" href="favorites.php?id=<?=$oa['id']?>&action=remove"><i class="fa-solid  fa-heart"></i></a>
+                            <?php else: ?>
+                                <a class="btn btn-outline-secondary" href="favorites.php?id=<?=$oa['id']?>&action=add"><i class="fa-regular fa-heart"></i></a>
+                            <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+			    <?php endif; ?>
+			<?php endforeach; ?>
 			</div>
 		</div>
 	</div>

@@ -20,12 +20,6 @@ $notif_count = count($notifications);
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
-            <a class="dropdown-item" href="gestiune_jurnalisti.php">
-                <i class="fa-solid fa-users"></i>
-                Gestioneaza jurnalisti
-            </a>
-        </li>
-        <li>
             <a class="dropdown-item" href="gestionare_articole.php">
                 <i class="fa-solid fa-list-ul"></i>
                 Gestioneaza Articole
@@ -34,6 +28,13 @@ $notif_count = count($notifications);
                     echo '<span class="badge text-bg-danger"> <i class="fa fa-bell"></i> '. $notif_count .'</span>';
                 }
                 ?>
+            </a>
+        </li>
+        <li><hr class="dropdown-divider"></li>
+        <li>
+            <a class="dropdown-item" href="favorites.php">
+                <i class="fa-solid fa-bookmark"></i>
+                Favorite
             </a>
         </li>
         <li><hr class="dropdown-divider"></li>

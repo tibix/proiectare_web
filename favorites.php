@@ -97,7 +97,7 @@ if(!empty($_GET['id']))
                     </div>
                     <div class="card-footer text-muted">
                         <a href="articol.php?id=<?=$u_fav['article_id']?>" target="_blank" class="btn btn-outline-secondary my-2">Go to Article</a>
-                        <a class="btn btn-outline-danger" href="favorites.php?id=<?=$u_fav['article_id']?>&action=remove"><i class="fa-solid fa-thumbs-up"></i></a>
+                        <a class="btn btn-outline-danger" href="favorites.php?id=<?=$u_fav['article_id']?>&action=remove"><i class="fa-solid fa-heart"></i></a>
 
                     </div>
                 </div>

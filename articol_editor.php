@@ -20,6 +20,8 @@ if(isset($_GET['id'])){
 	$arts = new Article($db);
 	$categories = $arts->getCategories();
 	$article = $arts->getArticleById($_GET['id']);
+    $notify = new Notification($db);
+    $notificari = $notify->getAllArticleNotifications($article['id']);
 	if($article['user_id'] != $_SESSION['user_id']){
 ?>
 	<div class="alert alert-warning alert-dismissible fade show text-center" role="alert">
@@ -78,6 +80,32 @@ if(isset($_GET['id'])){
 	</div>
 <?php } ?>
 </div>
+<?php if($notifications): ?>
+    <hr>
+    <h3 class="text-center">Notificari</h3>
+    <div class="list-group">
+
+        <?php foreach ($notifications as $notification):?>
+            <a href="" class="list-group-item list-group-item-action" aria-current="true">
+                <div class="d-flex w-100 justify-content-between">
+                    <h5 class="mb-1"><?=$notification['message']?></h5>
+
+                </div>
+                <p class="mb-1">Status:
+                    <?php if($notification['status'] == 'done'):?>
+                        <span class="badge bg-success">Done</span>
+                    <?php else: ?>
+                        <span class="badge bg-danger">New</span>
+                    <?php endif; ?>
+                </p>
+                <small>
+                    Postat de: <span class="fw-bold"><?=$notify->getUserById($notification['user_id'])?></span>,
+                    acum: <?=some_time_ago($notification['date_created'])?>
+                </small>
+            </a>
+        <?php endforeach; ?>
+    </div>
+<?php endif; ?>
 <script src="https://cdn.tiny.cloud/1/i3n24dewaedcnkj5ncgicuzwd8wi7lmbgdtsikehoxiix5dt/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
 <script>
   tinymce.init({

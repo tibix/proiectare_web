@@ -7,16 +7,23 @@
             <h5 class="card-title"><?php echo "{$articol['title']}"; ?></h5>
             <p class="card-text"><?php echo "{$articol['content']}";?></p>
         </div>
+        <?php if($articol['status_id'] == 2 || $articol['status_id'] == 3 || $articol['status_id'] == 5):?>
+        <div class="card-footer">
+            <a href="articol_editor.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-pen"></i> Editeaza</a>
+            <a href="publica_articol.php?id=<?=$articol['id']?>" class="btn btn-outline-warning text-dark"><i class="fa fa-upload"></i> Pregatit de publicare</a>
+        </div>
+        <?php endif; ?>
     </div>
+    <?php if($notifications): ?>
     <hr>
     <h3 class="text-center">Notificari</h3>
     <div class="list-group">
-        <?php if($notifications): ?>
+
         <?php foreach ($notifications as $notification):?>
         <a href="" class="list-group-item list-group-item-action" aria-current="true">
             <div class="d-flex w-100 justify-content-between">
                 <h5 class="mb-1"><?=$notification['message']?></h5>
-                <small><?=dates_difference($notification['date_created'])?></small>
+
             </div>
             <p class="mb-1">Status:
                 <?php if($notification['status'] == 'done'):?>
@@ -26,17 +33,13 @@
                 <?php endif; ?>
             </p>
             <small>
-                Postat de:
-                <?php if($notification['user_id'] == $_SESSION['user_id']): ?>
-                    <span class="fw-bold"><?=$_SESSION['user']?></span>
-                <?php else: ?>
-                    <span class="fw-bold">Editor</span>
-                <?php endif; ?>
+                Postat de: <span class="fw-bold"><?=$notify->getUserById($notification['user_id'])?></span>,
+                acum: <?=some_time_ago($notification['date_created']);?>
             </small>
         </a>
         <?php endforeach; ?>
-        <?php endif; ?>
     </div>
+    <?php endif; ?>
 </div>
 
 

@@ -33,22 +33,22 @@
                             </a>
                             <ul class="dropdown-menu" id="categorii">
                                 <li class="dropdown-item">
-                                    <a class="nav-link" href="tehnica.php">
+                                    <a class="nav-link" href="articole.php?categorie=2">
                                         <i class="fa-solid fa-microchip"></i> Tehnica
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link" href="arta.php">
+                                    <a class="nav-link" href="articole.php?categorie=1">
                                         <i class="fa-solid fa-palette"></i> Arta
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link" href="moda.php">
+                                    <a class="nav-link" href="articole.php?categorie=4">
                                         <i class="fa-solid fa-vest"></i> Moda
                                     </a>
                                 </li>
                                 <li class="dropdown-item">
-                                    <a class="nav-link" href="stiinta.php">
+                                    <a class="nav-link" href="articole.php?categorie=3">
                                         <i class="fa-solid fa-flask"></i> Stiinta
                                     </a>
                                 </li>

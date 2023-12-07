@@ -8,6 +8,7 @@ require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 require_once 'classes/User.php';
 require_once 'classes/Notification.php';
+require_once 'classes/Favorite.php';
 include 'templates/header.php';
 
 if(!logged_in()){
@@ -19,9 +20,8 @@ if(!empty($_GET))
     $db = new Database();
     $user = new User($db);
     $arts = new Article($db);
+    $fav = new Favorite($db);
     $notify = new Notification($db);
-
-
 
     $id = $_GET['id'];
 
@@ -36,11 +36,8 @@ if(!empty($_GET))
         if($_SESSION['role'] == 'editor' || $_SESSION['role'] == 'administrator')
         {
             include 'templates/t_articol_editor.php';
-        } else if ($_SESSION['role'] == 'jurnalist') {
-            if($articol['user_id'] == $_SESSION['user_id'])
-            {
-                include 'templates/t_articol_owner.php';
-            }
+        } else if ($articol['user_id'] == $_SESSION['user_id']) {
+            include 'templates/t_articol_owner.php';
         } else {
             include 'templates/t_articol.php';
         }

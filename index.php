@@ -39,12 +39,12 @@ usort($articles, "compare");
 					<a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
 					<?php if(logged_in()):?>
 						<?php if($fav->isFavorite($fa['id'], $_SESSION['user_id'])) { ?>
-							<a class="btn btn-outline-danger" href="favorites.php?id=<?=$fa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
+							<a class="btn btn-outline-danger" href="favorites.php?id=<?=$fa['id']?>&action=remove"><i class="fa-solid  fa-heart"></i></a>
 						<?php } else { ?>
-							<a class="btn btn-outline-secondary" href="favorites.php?id=<?=$fa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
+							<a class="btn btn-outline-secondary" href="favorites.php?id=<?=$fa['id']?>&action=add"><i class="fa-regular fa-heart"></i></a>
 						<?php } ?>
 					<?php endif; ?>
-					</br></br>Categorie: <a href="<?=idToCategory($fa['category_id'])?>.php" class="text-dark">[<?=ucfirst(idToCategory($fa['category_id']))?>]</a>
+					</br></br>Categorie: <a href="articole.php?categorie=<?=$fa['category_id']?>" class="text-dark">[<?=ucfirst(idToCategory($fa['category_id']))?>]</a>
 				</div>
 			</div>
 		</div>
@@ -57,12 +57,12 @@ usort($articles, "compare");
 					<a href="articol.php?id=<?=$fa['id']?>" class="btn btn-outline-warning">Citeste</a>
 					<?php if(logged_in()):?>
 					<?php if($fav->isFavorite($fa['id'], $_SESSION['user_id'])) { ?>
-						<a class="btn btn-outline-danger" href="favorites.php?id=<?=$fa['id']?>&action=remove"><i class="fa-solid  fa-thumbs-up"></i></a>
+						<a class="btn btn-outline-danger" href="favorites.php?id=<?=$fa['id']?>&action=remove"><i class="fa-solid  fa-heart"></i></a>
 					<?php } else { ?>
-						<a class="btn btn-outline-secondary" href="favorites.php?id=<?=$fa['id']?>&action=add"><i class="fa-regular fa-thumbs-up"></i></a>
+						<a class="btn btn-outline-secondary" href="favorites.php?id=<?=$fa['id']?>&action=add"><i class="fa-regular fa-heart"></i></a>
 					<?php } ?>
 					<?php endif; ?>
-					</br></br>Categorie: <a href="<?=idToCategory($fa['category_id'])?>.php" class="text-dark">[<?=ucfirst(idToCategory($fa['category_id']))?>]</a>
+					</br></br>Categorie: <a href="articole.php?categorie=<?=$fa['category_id']?>" class="text-dark">[<?=ucfirst(idToCategory($fa['category_id']))?>]</a>
 
 				</div>
 			</div>
