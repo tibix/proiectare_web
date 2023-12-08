@@ -59,7 +59,7 @@ if(isset($_POST['autentificare'])){
 
                                 <div class="form-outline form-white mb-4">
                                     <input type="text" name="login" id="login" class="form-control form-control-lg"
-                                    value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" />
+                                    value="<?php if(isset($_POST['email'])) { echo $_POST['email']; } ?>" autofocus />
                                     <label class="form-label" for="typeEmailX">Email/Nume utilizator</label>
                                 </div>
                                 <div class="form-outline form-white mb-4">
@@ -100,7 +100,7 @@ if(isset($_POST['autentificare'])){
                             <p class="text-white-50 mb-5">Intorduceti email si parola pentru autentificare!</p>
 
                             <div class="form-outline form-white mb-4">
-                                <input type="text" name="login" id="login" class="form-control form-control-lg" />
+                                <input type="text" name="login" id="login" class="form-control form-control-lg" autofocus/>
                                 <label class="form-label" for="typeEmailX">Email / Nume utilizator</label>
                             </div>
                             <div class="form-outline form-white mb-4">

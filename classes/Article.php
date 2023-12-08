@@ -194,4 +194,43 @@ class Article
         return $articles;
     }
 
+    public function getAllArticlesPerUser()
+    {
+        $sql = "SELECT COUNT(user_id) AS total_articles, CONCAT(f_name ,' ',l_name) AS author from articles, users where articles.user_id = users.id GROUP BY f_name, l_name";
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
+
+    public function getAllArticlesPerCategory()
+    {
+        $sql = "SELECT COUNT(category_id) AS count, category_name FROM articles,categories WHERE articles.category_id=categories.id  GROUP BY category_id";
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
+
+    public function getAllArticlesPerStatus()
+    {
+        $sql = "SELECT COUNT(status_id) AS count, status FROM articles,status WHERE articles.status_id=status.id  GROUP BY status_id";
+        $result = $this->db->query($sql);
+        $articles = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $articles[] = $row;
+        }
+
+        return $articles;
+    }
+
 }

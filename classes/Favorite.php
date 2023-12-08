@@ -120,4 +120,17 @@ class Favorite
 
         return false;
     }
+
+    public function getFavsPerUser()
+    {
+        $sql = "SELECT COUNT(article_id) AS count, CONCAT(f_name,' ',l_name) AS owner FROM favorites, users WHERE favorites.owner_id = users.id GROUP BY owner_id";
+        $result = $this->db->query($sql);
+        $favs = array();
+
+        while ($row = $result->fetch_assoc()) {
+            $favs[] = $row;
+        }
+
+        return $favs;
+    }
 }

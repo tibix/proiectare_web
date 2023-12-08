@@ -82,10 +82,45 @@ function some_time_ago($date)
     $now = new DateTime();
     $interval = $time1->diff($now,true);
 
-    if ($interval->y) echo $interval->y . ' ani';
-    elseif ($interval->m) echo $interval->m . ' luni';
-    elseif ($interval->d) echo $interval->d . ' zile';
-    elseif ($interval->h) echo $interval->h . ' ore';
-    elseif ($interval->i) echo $interval->i . ' minute';
-    else echo "mai putin de un minut";
+    if ($interval->y) {
+        if($interval->y == 1){
+            echo 'un an';
+        } else {
+            echo $interval->y . ' ani';
+        }
+    } elseif ($interval->m){
+        echo $interval->m . ' luni';
+    } elseif ($interval->d) {
+        echo $interval->d . ' zile';
+    } elseif ($interval->h) {
+        echo $interval->h . ' ore';
+    } elseif ($interval->i) {
+        echo $interval->i . ' minute';
+    } else {
+        echo "mai putin de un minut";
+    }
+}
+
+function generateRandomColor() {
+    $red = mt_rand(0, 255);
+    $green = mt_rand(0, 255);
+    $blue = mt_rand(0, 255);
+
+    return "'rgb($red, $green, $blue)'";
+}
+
+function idToRol($id)
+{
+    switch($id){
+        case 1:
+            return "Utilizator";
+            break;
+        case 2:
+            return "Jurnalist";
+            break;
+        case 3:
+            return "Editor";
+            break;
+    }
+    return null;
 }

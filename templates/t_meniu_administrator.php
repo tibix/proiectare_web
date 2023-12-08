@@ -4,21 +4,22 @@
     </button>
     <ul class="dropdown-menu dropdown-menu-end" id="dropDownMenu">
         <li>
-            <a class="dropdown-item" href="admin/">
+            <a class="dropdown-item" href="gestionare_utilizatori.php">
                 <i class="fa-solid fa-users"></i>
                 Gestioneaza Utilizatori
             </a>
         </li>
         <li>
-            <a class="dropdown-item" href="admin/">
+            <a class="dropdown-item" href="gestionare_articole.php">
                 <i class="fa-solid fa-user-plus"></i>
                 Gestioneaza Articole
             </a>
         </li>
+        <li><hr class="dropdown-divider"></li>
         <li>
-            <a class="dropdown-item" href="admin/adauga_editor.php">
-                <i class="fa-solid fa-user-tie"></i>
-                Adauga editor
+            <a class="dropdown-item" href="favorites.php">
+                <i class="fa-solid fa-bookmark"></i>
+                Favorite
             </a>
         </li>
         <li><hr class="dropdown-divider"></li>
