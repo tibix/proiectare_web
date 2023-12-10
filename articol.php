@@ -12,7 +12,7 @@ require_once 'classes/Favorite.php';
 include 'templates/header.php';
 
 if(!logged_in()){
-    redirect('index.php');
+    redirect('autentificare.php');
 }
 
 if(!empty($_GET))

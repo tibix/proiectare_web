@@ -1,11 +1,12 @@
 <?php
 session_start();
 
-include 'templates/header.php';
+include 'core/utils.php';
 require_once 'core/config.php';
 require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 require_once 'classes/User.php';
+include 'templates/header.php';
 
 echo "<div class=\"container\">";
 echo "<h1 class=\"text-center\">Termenul cautat este \"". $_GET['search'] ."\"</h1><br>";

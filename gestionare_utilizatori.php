@@ -20,32 +20,46 @@ $utilizatori = $user->getUsers([1,2,3]);
 ?>
 <div class="container-fluid">
     <div class="row my-3">
-        <div class="col-sm-12 bg-white mr-3">
-            <div class="accordion" id="articles">
-            <?php foreach($utilizatori as $index => $u): ?>
-                <div class="accordion-item">
-                    <h2 class="accordion-header" id="hitem<?=$u['id']?>">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#item<?=$u['id']?>" aria-expanded="true" aria-controls="item<?=$u['id']?>">
-                            <?=$u['u_name']?>
-                        </button>
-                    </h2>
-                    <div id="item<?=$u['id']?>" class="accordion-collapse collapse <?php if($index == 0) { echo 'show';} ?>" aria-labelledby="hitem<?=$u['id']?>">
-                        <div class="accordion-body">
-                            <p class="card-text">
-                                Rol: <strong><?=idToRol($u['role_id'])?></strong>
-                            </p>
-                            <p class="card-text">
-                                Creat: <strong><?=$u['date_created']?></strong> (acum: <?=some_time_ago($u['date_created'])?>)
-                            </p>
-                            <p class="card-text">
+    <table class="table table-sm table-hover table-responsive">
+        <thead>
+        <tr>
+            <th scope="col">#</th>
+            <th scope="col">Nume Utilizator</th>
+            <th scope="col">Nume</th>
+            <th scope="col">Prenume</th>
+            <th scope="col">Adresa de Email</th>
+            <th scope="col">Cont creat in</th>
+            <th scope="col">Ultima autentificare</th>
 
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            <?php endforeach; ?>
-            </div>
-        </div>
+        </tr>
+        </thead>
+        <tbody>
+        <?php foreach($utilizatori as $index => $u):?>
+        <tr>
+            <th scope="row"><?=$index?></th>
+            <td><?=$u['u_name']?></td>
+            <td><?=$u['f_name']?></td>
+            <td><?=$u['l_name']?></td>
+            <td><?=$u['email']?></td>
+            <td><?=$u['date_created']?></td>
+            <td>acum <?=some_time_ago($u['last_login'])?></td>
+            <td>
+                <button class="btn btn-outline-danger">Reseteaza parola</button>
+            </td>
+            <td>
+                <?php if($u['role_id'] < 4): ?>
+                    <button class="btn btn-outline-warning text-dark">Promoveza la <?=idToRol($u['role_id']+1)?></button>
+                <?php endif;?>
+            </td>
+            <td>
+                <?php if($u['role_id'] > 1): ?>
+                    <button class="btn btn-outline-warning text-dark">Retrogradeaza la <?=idToRol($u['role_id']-1)?></button>
+                <?php endif;?>
+            </td>
+        </tr>
+        <?php endforeach;?>
+        </tbody>
+    </table>
     </div>
 </div>
 

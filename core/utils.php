@@ -89,13 +89,29 @@ function some_time_ago($date)
             echo $interval->y . ' ani';
         }
     } elseif ($interval->m){
-        echo $interval->m . ' luni';
+        if($interval->m == 1){
+            echo 'o luna';
+        } else {
+            echo $interval->m . ' luni';
+        }
     } elseif ($interval->d) {
-        echo $interval->d . ' zile';
+        if($interval->d == 1) {
+            echo 'o zi';
+        } else {
+            echo $interval->d . ' zile';
+        }
     } elseif ($interval->h) {
-        echo $interval->h . ' ore';
+        if($interval->h == 1){
+            echo 'o ora';
+        } else {
+            echo $interval->h . ' ore';
+        }
     } elseif ($interval->i) {
-        echo $interval->i . ' minute';
+        if($interval->i == 1){
+            echo 'un minut';
+        } else {
+            echo $interval->i . ' minute';
+        }
     } else {
         echo "mai putin de un minut";
     }
@@ -120,6 +136,9 @@ function idToRol($id)
             break;
         case 3:
             return "Editor";
+            break;
+        case 4:
+            return "Administrator";
             break;
     }
     return null;
