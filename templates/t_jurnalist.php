@@ -41,7 +41,7 @@ usort($other_articles, "compare");
 <div class="container-fluid">
 	<div class="row my-3">
 		<div class="col-sm-8 bg-white mr-3">
-            <?php if(!empty($drafts)):?>
+            <?php if($drafts):?>
             <h1 class="text-center">Articole in Lucru</h1>
             <div class="row">
                 <?php foreach($drafts as $dr):?>
@@ -59,9 +59,17 @@ usort($other_articles, "compare");
                         </div>
                     </div>
                 <?php endforeach; ?>
+            <?php else: ?>
+                <h1 class="text-center">Articole in Lucru</h1>
+                <div class="row">
+                    <span class="text-center fs-2 fw-bold">
+                        Nu ai nici un articol in lucru!
+                    </span>
+                </div>
             <?php endif; ?>
-            <?php if(!empty($my_articles)):?>
-            <hr><h1 class="text-center">Articole Publicate</h1>
+            <hr>
+            <?php if($my_articles):?>
+            <h1 class="text-center">Articole Publicate</h1>
             <div class="row mx-3">
                 <?php foreach($my_articles as $fa):?>
                     <?php if($fa['featured'] == 1): ?>
@@ -91,6 +99,13 @@ usort($other_articles, "compare");
                     </div>
                     <?php endif; ?>
                 <?php endforeach; ?>
+            <?php else:?>
+                <h1 class="text-center">Articole Publicate</h1>
+                <div class="row mx-3">
+                    <span class="text-center fs-2 fw-bold">
+                        Inca nu ai articole publicate!
+                    </span>
+                </div>
             <?php endif;?>
 				</div>
 			</div>

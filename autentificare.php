@@ -36,6 +36,7 @@ if(isset($_POST['autentificare'])){
             $_SESSION['email'] = $login['email'];
             $_SESSION['role'] = $login['role_type'];
             $_SESSION['loggedin'] = TRUE;
+            $auth->updateLastLogin($login['id']);
             redirect("home.php");
         } else {
             echo "<div class=\"alert alert-danger alert-dismissible text-secondary fade show\" role=\"alert\">Parola incorecta!";

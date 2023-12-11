@@ -143,3 +143,25 @@ function idToRol($id)
     }
     return null;
 }
+
+function idToStatus($id)
+{
+    switch($id){
+        case 1:
+            return "Publicat";
+            break;
+        case 2:
+            return "Nepublicat";
+            break;
+        case 3:
+            return "Draft";
+            break;
+        case 4:
+            return "Arhivat";
+            break;
+        case 5:
+            return "Respins";
+            break;
+    }
+    return null;
+}

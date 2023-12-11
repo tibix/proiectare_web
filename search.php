@@ -2,7 +2,7 @@
 session_start();
 
 include 'core/utils.php';
-require_once 'core/config.php';
+
 require_once 'classes/Database.php';
 require_once 'classes/Article.php';
 require_once 'classes/User.php';
@@ -15,7 +15,17 @@ $db = new Database();
 $articol = new Article($db);
 
 if(!empty($_GET['search'])){
-    $articole = $articol->searchArticles($_GET['search']);
+    if($_SESSION['role'])
+    {
+        if($_SESSION['role'] == 'editor' || $_SESSION['role'] == 'administrator')
+        {
+            $articole = $articol->searchArticles($_GET['search']);
+        } else {
+            $articole = $articol->searchArticles($_GET['search'], [1]);
+        }
+    } else {
+        $articole = $articol->searchArticles($_GET['search'], [1]);
+    }
 
     if(count($articole) > 0){
         echo "<h3 class=\"text-center\">Am gasit " . count($articole) . " rezultate ce contin termenul \"". $_GET['search']. "\"</h3>";

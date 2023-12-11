@@ -1,3 +1,3 @@
 <?php
 
-echo "Utilizator";
+redirect('index.php');

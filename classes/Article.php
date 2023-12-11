@@ -13,6 +13,38 @@ class Article
 		$this->db = $database;
 	}
 
+    public function isFeatured($id)
+    {
+        $id = (int)$id;
+
+        $sql = "SELECT featured FROM articles WHERE id = $id";
+        $row = $this->db->query($sql);
+
+        $result = $row->fetch_assoc();
+
+        return (int)$result['featured'];
+    }
+
+    public function setFeaturedArticle($id)
+    {
+        $id = (int)$id;
+
+        $sql = "UPDATE articles SET featured = 1 WHERE id = $id";
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
+
+    public function removeFeaturedArticle($id)
+    {
+        $id = (int)$id;
+
+        $sql = "UPDATE articles SET featured = 0 WHERE id = $id";
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
+
 	public function getFeaturedArticles()
 	{
 		$sql = "SELECT * FROM articles WHERE status_id = 1 AND featured = 1";
@@ -42,6 +74,17 @@ class Article
 			return false;
 		}
 	}
+
+    public function getOwner($id)
+    {
+        $id = (int)$id;
+        $sql = "SELECT u_name FROM users WHERE id = (SELECT user_id FROM articles WHERE id = $id)";
+
+        $row = $this->db->query($sql);
+        $result = $row->fetch_assoc();
+
+        return $result['u_name'];
+    }
 
 	public function getCategories()
 	{
@@ -153,10 +196,14 @@ class Article
 		return $this->db->query($sql);
 	}
 
-	public function searchArticles($search)
+	public function searchArticles($search, $status=null)
 	{
 		$search = $this->db->escapeString($search);
-		$sql = "SELECT * FROM articles WHERE title LIKE '%$search%' OR content LIKE '%$search%'";
+        if($status) {
+            $sql = "SELECT * FROM articles WHERE (title LIKE '%$search%' OR content LIKE '%$search%') AND status_id IN (". implode(',', $status).")";
+        } else {
+            $sql = "SELECT * FROM articles WHERE title LIKE '%$search%' OR content LIKE '%$search%'";
+        }
 
 		$result = $this->db->query($sql);
 		$articles = array();

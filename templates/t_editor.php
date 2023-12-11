@@ -79,6 +79,7 @@ usort($other_articles, "compare");
         <div class="col-sm-4 bg-white ml-3">
             <h1 class="text-center">Articole de verificat</h1>
             <div class="row mx-3">
+                <?php if($drafts):?>
                 <div class="row">
                     <?php foreach($drafts as $dr):?>
                         <div class="col-lg-6">
@@ -103,6 +104,13 @@ usort($other_articles, "compare");
                         </div>
                     <?php endforeach; ?>
                 </div>
+                <?php else:?>
+                <div class="row">
+                    <span class="text-center fs-3 fw-bold">
+                        Nu ai nici un articol de verificat!
+                    </span>
+                </div>
+                <?php endif;?>
             </div>
         </div>
 

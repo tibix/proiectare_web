@@ -2,7 +2,6 @@
 
 include 'core/utils.php';
 
-require_once 'core/config.php';
 require_once 'classes/Database.php';
 require_once 'classes/User.php';
 

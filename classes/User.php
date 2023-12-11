@@ -162,4 +162,17 @@ class User
 
         return $this->db->query($sql);
     }
+
+    public function updateLastLogin($login)
+    {
+        $login = (int)$login;
+        $date = new DateTime("now");
+        $now = $date->format('Y-m-d H:i:s');
+
+        $sql = "UPDATE users SET last_login = '$now' WHERE id = $login";
+
+        $result = $this->db->query($sql);
+
+        return $result;
+    }
 }

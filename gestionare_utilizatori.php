@@ -48,13 +48,16 @@ $utilizatori = $user->getUsers([1,2,3]);
             </td>
             <td>
                 <?php if($u['role_id'] < 4): ?>
-                    <button class="btn btn-outline-warning text-dark">Promoveza la <?=idToRol($u['role_id']+1)?></button>
+                    <a class="btn btn-outline-warning text-dark" href="gestioneaza_utilizator.php?id=<?=$u['id']?>&action=promote">Promoveza la <?=idToRol($u['role_id']+1)?></a>
                 <?php endif;?>
             </td>
             <td>
                 <?php if($u['role_id'] > 1): ?>
-                    <button class="btn btn-outline-warning text-dark">Retrogradeaza la <?=idToRol($u['role_id']-1)?></button>
+                    <a class="btn btn-outline-warning text-dark" href="gestioneaza_utilizator.php?id=<?=$u['id']?>&action=demote">Retrogradeaza la <?=idToRol($u['role_id']-1)?></a>
                 <?php endif;?>
+            </td>
+            <td>
+                <a class="btn btn-danger text-light" href="sterge_utilizator.php?id=<?=$u['id'];?>"><i class="fa fa-trash"></i> Sterge utilizatorul</a>
             </td>
         </tr>
         <?php endforeach;?>

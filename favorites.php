@@ -81,11 +81,10 @@ if(!empty($_GET['id']))
     $fav = new Favorite($db);
 
     $user_favs = $fav->getAllFavorites($_SESSION['user_id']);
-
-    echo '<div class="row m-3">';
-    if($user_favs){
-        foreach($user_favs as $u_fav)
-        {?>
+?>
+    <?php if($user_favs): ?>
+    <div class="row m-3">
+        <?php foreach($user_favs as $u_fav): ?>
             <div class="col-sm-3">
                 <div class="card text-center mb-4">
                     <div class="card-header">
@@ -102,10 +101,13 @@ if(!empty($_GET['id']))
                     </div>
                 </div>
             </div>
-            <?php
-        }
-    }
-    echo '</div>';
+        <?php endforeach; ?>
+    </div>
+    <?php else: ?>
+    <div class="row m-3">
+        <span class="text-center fs-3 fw-bold">Nu ai nici un articol adaugat la favorite!</span>
+    </div>
+    <?php endif; ?>
+<?php
 }
-
 include 'templates/footer.php';
