@@ -62,7 +62,7 @@ if(isset($_GET)){
                     show_errors(['not yours']);
                 }
             } else {
-                show_errors(['not jurnalist']);
+                show_errors(['not jurnalist/editor']);
             }
         } else {
             redirect('home.php');

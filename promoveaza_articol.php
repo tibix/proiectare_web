@@ -12,7 +12,7 @@ if(!logged_in())
     redirect('autentificare.php');
 }
 
-if($_SESSION['role'] != 'editor' || $_SESSION['role'] != 'administrator')
+if($_SESSION['role'] != "editor" && $_SESSION['role'] != "administrator")
 {
     redirect('home.php');
 }
